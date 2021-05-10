@@ -25,9 +25,13 @@ While working with CIS Benchmarks PDF (guidelines for scripts and/or Configurati
 So i started to transform the CIS Benchmark PDF from Big Sur into a custom rules set to integrate with the macOS Security Compliance Project.
 
 ## Usage/Requirements
-* The CIS Benchmark rules are tested on macOS Big Sur 11.* and the latest macOS Security Compliance Project release.
-* Download the macOS Security Compliance Project to your device. 
-* Copy the CIS-macOS-Security `/custom/` folder into the macOS Security Compliance Project and overwrite the empty `/custom/` folder. The `/custom/` folder in the macOS Security Compliance Project is in .gitignore file so you could easly update to the latest version of macOS Security Compliance Project without loosing the CIS Benchmark baselines.
+*The CIS Benchmark rules are tested on macOS Big Sur 11.* and the latest macOS Security Compliance Project release.*
+
+1. Download the **CIS-macOS-Security** to your device. 
+2. Download the **macOS Security Compliance Project** to your device. 
+3. Copy the **CIS-macOS-Security** `/custom/` folder into the **macOS Security Compliance Project** and overwrite the empty `/custom/` folder. 
+
+The `/custom/` folder in the **macOS Security Compliance Project** is in the .gitignore file so you can safely update to the latest version of **macOS Security Compliance Project** without loosing the **CIS Benchmark baselines**.
 
 
 ### Generate a Baseline
@@ -37,11 +41,11 @@ The project provides the following baseline files, located in the `/custom/basel
 * CIS-Benchmark-L1.yaml
 * CIS-Benchmark-L2.yaml
 
-If you want to create your own baseline or modify an existing baseline, the generate-baseline.py found in the scripts folder will generate a {baseline}.yaml file containing all the rules corresponding with the provided tag (baseline). This {baseline}.yaml is required to run the generate-guidance.py script.
+If you want to create your own baseline or modify an existing baseline, the `generate-baseline.py` found in the scripts folder will generate a `{baseline}.yaml` file containing all the rules corresponding with the provided tag (baseline). This `{baseline}.yaml` is required to run the `generate-guidance.py` script.
 
 Get a list of available tags and you will see the CIS-Benchmark tags as well
 ```bash
-➜  CIS-macOS-Security git:(master) ./scripts/generate_baseline.py -l
+$ macOS-Security git:(master) ./scripts/generate_baseline.py -l
 ```
 
 * 800-171
@@ -63,8 +67,8 @@ Get a list of available tags and you will see the CIS-Benchmark tags as well
 **Generate a new baseline**
 
 ```bash
-➜  CIS-macOS-Security git:(master) ./scripts/generate_baseline.py -k CIS-Benchmark-L1
-➜  CIS-macOS-Security git:(master) ls -dn build/baselines/*
+$ macOS-Security git:(master) ./scripts/generate_baseline.py -k CIS-Benchmark-L1
+$ macOS-Security git:(master) ls -dn build/baselines/*
 -rw-r--r--  1 501  20  6350 May 10 13:30 build/baselines/CIS-Benchmark-L1.yaml
 ```
 The generated baseline will be saved into the `build/baselines/`
@@ -76,27 +80,27 @@ To generate the guidance files (AsciiDoc, HTML, PDF, Excel, mobileconfigs, and c
 **AsciiDoc, HTML, and PDF**
 
 ```bash
-./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml
+$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml
 ```
 
 **AsciiDoc, HTML, PDF, and Excel**
 
 ```bash
-./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x
+$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x
 ```
 **AsciiDoc, HTML, PDF, Excel, and mobileconfigs**
 
 ```bash
-./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p
+$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p
 ```
 **AsciiDoc, HTML, PDF, Excel, mobileconfigs, and compliance script**
 
 ```bash
-./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p -s
+$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p -s
 ```
 
 **AsciiDoc, HTML, PDF, Excel, mobileconfigs, compliance script, and custom**
 _use full-path to custom logo_
 ```bash
-./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Git/CIS-macOS-Security/custom/Images/cis_banner.png -p -s -x
+$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Git/macOS-Security/custom/Images/cis_banner.png -p -s -x
 ```
