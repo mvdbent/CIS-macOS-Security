@@ -95,7 +95,8 @@ To generate the guidance files (AsciiDoc, HTML, PDF, Excel, mobileconfigs, and c
 ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p -s
 ```
 
-**AsciiDoc, HTML, PDF, Excel, mobileconfigs, compliance script, and custom **
+**AsciiDoc, HTML, PDF, Excel, mobileconfigs, compliance script, and custom**
+_use full-path to custom logo_
 ```bash
-./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Users/<user>/Git/CIS-macOS-Security/custom/Images/cis_banner.png -p -s -x
+./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Git/CIS-macOS-Security/custom/Images/cis_banner.png -p -s -x
 ```
