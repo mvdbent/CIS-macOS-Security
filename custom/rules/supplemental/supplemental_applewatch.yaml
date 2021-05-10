@@ -1,0 +1,33 @@
+id: supplemental_applewatch
+title: "Apple Watch features with macOS (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  With the release of macOS 10.12 Apple introduced a feature where the owner of an Apple Watch can lock and unlock their screen simply by being within range of a 10.12 computer when both devices are using the same AppleID with iCloud active. The benefit of not leaving the computer unlocked while the user is out of sight and readying the computer to resume work when the user returns without having to type in a password or insert a smartcard does seem attractive to people who have the Apple Watch. It is a continuation of other features like hand-off and continuity for the multiple Apple products users who have grown to expect their devices to work together.
+
+  For the screen unlock capability in particular, it may not be attractive to organizations that are managing Apple devices and credentials. The capability allows a user to unlock their computer tied to an Enterprise account with a personal token that is not managed or controlled by the Enterprise. If the user loses their watch revoking the credential that can unlock the screen might be problematic.
+
+  Apple Watches should not be used for screen unlocks, unless Enterprise control of the watch as a token tied to a user identity can be achieved. The risk of an auto-lock based on the user being out of proximity may still be acceptable if possible to do lock only.
+
+  This functionality does require the computer to be logged in to iCloud. If iCloud is disabled the Apple watch lock and unlock will not be possible.
+
+  A profile may be used to control unlock functionality.
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 7.5 Apple Watch features with macOS (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

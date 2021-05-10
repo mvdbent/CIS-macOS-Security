@@ -1,0 +1,21 @@
+id: supplemental_encryption
+title: "Encryption"
+discussion: |
+  Apple has created simple easy to use encryption capabilities built-in to macOS. In order to protect data and privacy those tools need to be utilized to protect information processed by macOS computers
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 2.5.1 Encryption
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+mobileconfig: false
+mobileconfig_info:

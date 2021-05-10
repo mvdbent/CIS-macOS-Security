@@ -1,0 +1,53 @@
+id: cisnetwork_wifi_menubar
+title: 'Enable "Show Wi-Fi status in menu bar" (Automated)'
+discussion: |
+  [discrete]
+  ==== Description:
+  The Wi-Fi status in the menu bar indicates if the system's wireless internet capabilities are enabled. If so, the system will scan for available wireless networks to connect to. At the time of this revision all computers Apple builds have wireless network capability, which has not always been the case. This control only pertains to systems that have a wireless NIC available. Operating systems running in a virtual environment may not score as expected either.
+  
+  [discrete]
+  ==== Rationale:
+  Enabling "Show Wi-Fi status in menu bar" is a security awareness method that helps mitigate public area wireless exploits by making the user aware of their wireless connectivity status.
+
+  [IMPORTANT]
+  ====
+  The user of the system should have a quick check on their wireless network status available
+  ====
+
+  [discrete]
+  ==== Audit:
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+check: |
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults -currentHost read com.apple.controlcenter.plist WiFi
+result:
+  boolean: 18
+fix: |
+  For each user, run the following to turn the Wi-Fi status on in the menu bar
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults -currentHost write com.apple.controlcenter.plist WiFi -int 18
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 4.2 Enable "Show Wi-Fi status in menu bar" (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,44 @@
+id: cispwmanagement_alpha_character_enable
+title: "Complex passwords must contain an Alphabetic Character (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Complex passwords contain one character from each of the following classes: English uppercase letters, English lowercase letters, Westernized Arabic numerals, and non- alphanumeric characters.
+
+  Ensure that an Alphabetic character is part of the password policy on the computer
+
+  [discrete]
+  ==== Rationale:
+  The more complex a password the more resistant it will be against persons seeking unauthorized access to a system.
+  
+  [IMPORTANT]
+  ====
+  Password policy should be in effect to reduce the risk of exposed services being compromised easily through dictionary attacks or other social engineering attempts.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: | 
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'requiresAlpha = 1' 
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.2.3 Complex passwords must contain an Alphabetic Character (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: true
+mobileconfig_info:
+  com.apple.mobiledevice.passwordpolicy:
+    requiresAlpha: true

@@ -1,0 +1,45 @@
+id: cisupdates_system_security_updates
+title: "Enable system data files and security update installs"
+discussion: |
+  [discrete]
+  ==== Description: 
+  Ensure that system and security updates are installed after they are available from Apple. This setting enables definition updates for XProtect and Gatekeeper, with this setting in place new malware and adware that Apple has added to the list of malware or untrusted software will not execute. These updates do not require reboots or end user admin rights.
+  http://www.thesafemac.com/tag/xprotect/
+  https://support.apple.com/en-us/HT202491
+  
+  [discrete]
+  ==== Rationale:
+  Patches need to be applied in a timely manner to reduce the risk of vulnerabilities being exploited
+
+  [IMPORTANT]
+  ====
+  Unpatched software may be exploited
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -Ec '(ConfigDataInstall = 1 | CriticalUpdateInstall = 1)'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 1.5 Enable system data files and security updates install (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.SoftwareUpdate:
+    ConfigDataInstall: true
+    CriticalUpdateInstall: true

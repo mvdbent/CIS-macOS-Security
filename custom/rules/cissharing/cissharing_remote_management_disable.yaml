@@ -1,0 +1,49 @@
+id: cissharing_remote_management_disable
+title: "Disable Remote Management"
+discussion: |
+  [discrete]
+  ==== Description:
+  Remote Management is the client portion of Apple Remote Desktop (ARD). Remote Management can be used by remote administrators to view the current Screen, install software, report on, and generally manage client Macs.
+
+  The screen sharing options in Remote Management are identical to those in the Screen Sharing section. In fact, only one of the two can be configured. If Remote Management is used, refer to the Screen Sharing section above on issues regard screen sharing.
+
+  Remote Management should only be enabled when a Directory is in place to manage the accounts with access. Computers will be available on port 5900 on a macOS System and could accept connections from untrusted hosts depending on the configuration, definitely a concern for mobile systems.
+  
+  [discrete]
+  ==== Rationale:
+  Remote management should only be enabled on trusted networks with strong user controls present in a Directory system. Mobile devices without strict controls are vulnerable to exploit and monitoring.
+  
+  [IMPORTANT]
+  ====
+  Many organizations utilize ARD for client management.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /bin/launchctl print-disabled system | /usr/bin/grep -c '"com.apple.screensharing" => true'
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -stop
+  ----
+  NOTE - This will apply to the whole system
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.4.9 Disable Remote Management (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

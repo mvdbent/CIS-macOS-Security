@@ -1,0 +1,61 @@
+id: cissystempremissions_home_folders_secure
+title: "Secure Home Folders (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  By default macOS allows all valid users into the top level of every other users home folder, and restricts access to the Apple default folders within. Another user on the same system can see you have a "Documents" folder but cannot see inside it. This configuration does work for personal file sharing but can expose user files to standard accounts on the system.
+  
+  The best parallel for Enterprise environments is that everyone who has a Dropbox account can see everything that is at the top level but can't see your pictures, in the parallel with macOS they can see into every new Directory that is created because of the default permissions.
+  
+  Home folders should be restricted to access only by the user. Sharing should be used on dedicated servers or cloud instances that are managing access controls. Some environments may encounter problems if execute rights are removed as well as read and write. Either no access or execute only for group or others is acceptable
+
+  [discrete]
+  ==== Rationale:
+  Allowing all users to view the top level of all networked user's home folder may not be desirable since it may lead to the revelation of sensitive information.
+  
+  [IMPORTANT]
+  ====
+  If implemented, users will not be able to use the "Public" folders in other users' home folders. "Public" folders with appropriate permissions would need to be set up in the /Shared folder.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/find /System/Volumes/Data/Users -mindepth 1 -maxdepth 1 -type d -perm -1 | /usr/bin/grep -v "Shared" | /usr/bin/grep -v "Guest" | /usr/bin/wc -l | /usr/bin/xargs
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  IFS=$'\n'
+  for userDirs in $( /usr/bin/find /System/Volumes/Data/Users -mindepth 1 -maxdepth 1 -type d -perm -1 | /usr/bin/grep -v "Shared" | /usr/bin/grep -v "Guest" ); do
+    /bin/chmod og-rwx "$userDirs"
+  done
+  unset IFS
+  ----
+references:
+  cce:
+    - CCE-85322-6
+  cci:
+    - CCI-000366
+  800-53r4:
+    - AC-6
+  srg:
+    - SRG-OS-000480-GPOS-00228
+    - SRG-OS-000480-GPOS-00230
+  disa_stig:
+    - APPL-11-002068
+  800-171r2:
+    - 3.1.5
+  custom:
+    CIS:
+    - 5.1.1 Secure Home Folders (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

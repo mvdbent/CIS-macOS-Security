@@ -1,0 +1,48 @@
+id: cistimemachine_time_machine_encrypted
+title: "Time Machine Volumes Are Encrypted"
+discussion: |
+  [discrete]
+  ==== Description:
+  One of the most important security tools for data protection on macOS is FileVault. With encryption in place it makes it difficult for an outside party to access your data if they get physical possession of the computer. One very large weakness in data protection with FileVault is the level of protection on backup volumes. If the internal drive is encrypted but the external backup volume that goes home in the same laptop bag is not it is self-defeating. Apple tries to make this mistake easily avoided by providing a checkbox to enable encryption when setting-up a time machine backup. Using this option does require some password management, particularly if a large drive is used with multiple computers. A unique complex password to unlock the drive can be stored in keychains on multiple systems for ease of use.
+  
+  While some portable drives may contain non-sensitive data and encryption may make interoperability with other systems difficult backup volumes should be protected just like boot volumes.
+
+  [discrete]
+  ==== Rationale:
+  Backup volumes need to be encrypted
+
+  [discrete]
+  ==== Audit:
+check: |
+  tmDestination=$(/usr/bin/tmutil destinationinfo | grep -i NAME | awk '{print $2}')
+  /usr/sbin/diskutil info "${tmDestination}" | grep -c "Encrypted: Yes"
+result:
+  integer: 1
+fix: |
+  Perform the following to enable encryption on the TimeMachine drive:
+  Graphical Method:
+
+  1. Open System Preferences
+  2. Select Time Machine
+  3. Select Backup Disk...
+  4. Select the existing TimeMachine backup drive from the Available Drive list
+  5. Set Encrypt backups
+  6. Select Use Disk
+  
+  Note: You can set encryption through Disk Utility or diskutil in terminal.
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.7.2 Time Machine Volumes Are Encrypted (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

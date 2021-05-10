@@ -1,0 +1,53 @@
+id: cissharing_internet_sharing_disable
+title: "Disable Internet Sharing"
+discussion: |
+  [discrete]
+  ==== Description:
+  Internet Sharing uses the open source natd process to share an internet connection with other computers and devices on a local network. This allows the Mac to function as a router and share the connection to other, possibly unauthorized, devices.
+  
+  [discrete]
+  ==== Rationale:
+  Disabling Internet Sharing reduces the remote attack surface of the system.
+  
+  [IMPORTANT]
+  ====
+  Internet sharing allows the computer to function as a router and other computers to use it for access. This can expose both the computer itself and the networks it is accessing to unacceptable access from unapproved devices.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'forceInternetSharingOff = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85433-1
+  cci: 
+    - CCI-000381
+  800-53r4: 
+    - AC-4
+    - AC-20
+  srg: 
+    - SRG-OS-000095-GPOS-00049
+  disa_stig: 
+    - APPL-11-002007
+  800-171r2:
+    - 3.1.3
+    - 3.1.20
+  custom:
+    CIS:
+    - 2.4.2 Disable Internet Sharing (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.MCX:
+    forceInternetSharingOff: true

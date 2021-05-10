@@ -1,0 +1,5 @@
+  name: "iCloud"
+  description: |
+    iCloud is Apple's service for synchronizing, storing and backing up data from Apple applications in both macOS and iOS.
+
+    macOS controls for iCloud are part of the Apple ID settings in macOS. The configuration options in macOS resemble the options in iOS.

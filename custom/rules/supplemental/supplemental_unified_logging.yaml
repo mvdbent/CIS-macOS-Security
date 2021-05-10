@@ -1,0 +1,31 @@
+id: supplemental_unified_logging
+title: "Unified logging (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Starting with macOS 10.12 Apple introduced unified logging. This capability replaces the previous logging methodology with centralized system wide common controls. A full explanation of macOS logging behavior is beyond the scope of this Benchmark. These changes impact previous logging controls from macOS Benchmarks. At this point many of the syslog controls have been or are being removed since the old logging methods have been deprecated. Controls that still appear useful will be retained. Some legacy controls have been removed for this release.
+
+  More info 
+  
+  https://developer.apple.com/documentation/os/logging 
+  
+  https://eclecticlight.co/2018/03/19/macos-unified-log-1-why-what-and-how/
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 7.7 Unified logging (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

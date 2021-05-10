@@ -1,0 +1,76 @@
+id: cistimemachine_review_siri
+title: "Review Siri Settings (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  With macOS 10.12 Sierra Apple has introduced Siri from iOS to macOS. While there are data spillage concerns with the use of data gathering personal assistant software, the risk here does not seem greater in sending queries to Apple through Siri than in sending search terms in a browser to Google or Microsoft. While it is possible that Siri will be used for local actions rather than Internet searches, Siri could, in theory, tell Apple about confidential Programs and Projects that should not be revealed. This appears be a usage edge case.
+  
+  In cases where sensitive and protected data is processed and Siri could help a user navigate their machine and expose that information it should be disabled. Siri does need to phone home to Apple so it should not be available from air-gapped networks as part of its requirements.
+  
+  Most of the use case data published has shown that Siri is a tremendous time saver on iOS where multiple screens and menus need to be navigated through. Information like sports scores, weather, movie times and simple to-do items on existing calendars can be easily found with Siri. None of the standard use cases should be more risky than already approved activity.
+  
+  For information on Apple's privacy policy for Siri, click here.
+
+  [discrete]
+  ==== Rationale:
+  Where "normal" user activity is already limited, Siri use should be controlled as well. 
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+
+  [discrete]
+  ==== Audit:
+  Run the following commands to verify the Siri settings:
+
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults read com.apple.assistant.support.plist 'Assistant Enabled'
+  ----
+  The output will be either 0, Siri is disabled, or 1, Siri is enabled.
+
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults read com.apple.Siri.plist
+  ----
+  The output will be either 0, disabled, or 1 for the following Siri options:
+
+  1. LockscreenEnabled - Is Siri enabled when the system is locked?
+
+  2. StatusMenuVisible - Is Siri visible in the menu bar?
+
+  3. VoiceTriggerUserEnabled - Is "Hey Siri" enabled?
+check: |
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults read com.apple.assistant.support.plist 'Assistant Enabled'
+result:
+  integer: 0
+fix: |
+  Run the following commands to disable Siri settings
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults write com.apple.assistant.support.plist 'Assistant Enabled' -bool false
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults write com.apple.Siri.plist LockscreenEnabled - bool false
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults write com.apple.Siri.plist StatusMenuVisible - bool false
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults write com.apple.Siri.plist VoiceTriggerUserEnabled -bool false
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.13 Review Siri Settings (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,42 @@
+id: cisupdates_macos_updates
+title: "Enable macOS updates installs"
+discussion: |
+  [discrete]
+  ==== Description:
+  Ensure that macOS updates are installed after they are available from Apple. This setting enables macOS updates to be automatically installed. Some environments will want to approve and test updates before they are delivered. It is best practice to test first where updates can and have caused disruptions to operations. Automatic updates should be turned off where changes are tightly controlled and there are mature testing and approval processes. Automatic updates should not be turned off so the admin can call the users first to let them know it's ok to install. A dependable repeatable process involving a patch agent or remote management tool should be in place before auto-updates are turned off.
+  
+  [discrete]
+  ==== Rationale:
+  Patches need to be applied in a timely manner to reduce the risk of vulnerabilities being exploited
+
+  [IMPORTANT]
+  ====
+  Unpatched software may be exploited
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'AutomaticallyInstallMacOSUpdates = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 1.6 Enable macOS update installs (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.SoftwareUpdate:
+    AutomaticallyInstallMacOSUpdates: true

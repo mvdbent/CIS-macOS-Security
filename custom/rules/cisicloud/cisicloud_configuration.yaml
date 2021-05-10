@@ -1,0 +1,55 @@
+id: cisicloud_configuration
+title: "iCloud configuration"
+discussion: |
+  [discrete]
+  ==== Description:
+  Apple's iCloud is a consumer-oriented service that allows a user to store data as well as find, control and backup devices that are associated with their Apple ID (Apple account.) The use of iCloud on Enterprise devices should align with the acceptable use policy for devices that are managed as well as confidentiality requirements for data handled by the user. If iCloud is allowed the data that is copied to Apple servers will likely be duplicated on both personal as well as Enterprise devices.
+
+  For many users the Enterprise email system may replace many of the available features in iCloud. If using either an Exchange or Google environment email, calendars, notes and contacts can sync to the official Enterprise repository and be available through multiple devices.
+
+  Depending on workplace requirements it may not be appropriate to intermingle Enterprise and personal bookmarks, photos and documents. Since the service allows every device associated with the users ID to synchronize and have access to the cloud storage the concern is not just about having sensitive data on Apple's servers but having that same data on the phone of the teenage son or daughter of an employee. The use of family sharing options can reduce the risk.
+
+  Apple's iCloud is just one of many cloud-based solutions being used for data synchronization across multiple platforms and it should be controlled consistently with other cloud services in your environment. Work with your employees and configure the access to best enable data protection for your mission.
+
+  [discrete]
+  ==== Rationale:
+  Organizations must make a risk decision on how their computers will interact with public cloud services.
+
+  [IMPORTANT]
+  ====
+  iCloud services are integrated deeply into macOS and in many cases are expected to be used by Mac users. iCloud is a public cloud and is not covered by an organizational security plans. In many cases synchronizing user data from an organizational computer to an uncontrolled location, no matter who is the data owner, is unacceptable.
+  ====
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults read /Users/"$CURRENT_USER"/Library/Preferences/MobileMeAccounts | /usr/bin/grep -c 'AccountDescription = iCloud'
+result:
+  boolean: 0
+fix: |
+  Use a profile to disable services where organizationally required.
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.6.1 iCloud configuration (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

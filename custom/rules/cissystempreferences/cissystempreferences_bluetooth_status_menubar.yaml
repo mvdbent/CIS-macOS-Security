@@ -1,0 +1,52 @@
+id: cissystempreferences_bluetooth_status_menubar
+title: "Show Bluetooth status in menu bar"
+discussion: |
+  [discrete]
+  ==== Description:
+  By showing the Bluetooth status in the menu bar, a small Bluetooth icon is placed in the menu bar. This icon quickly shows the status of Bluetooth, and can allow the user to quickly turn Bluetooth on or off.
+  
+  [discrete]
+  ==== Rationale:
+  Enabling "Show Bluetooth status in menu bar" is a security awareness method that helps understand the current state of Bluetooth, including whether it is enabled, Discoverable, what paired devices exist and are currently active.
+  
+  [IMPORTANT]
+  ====
+  Bluetooth is a useful wireless tool that has been widely exploited when configured improperly. The user should have insight into the Bluetooth status.
+  ====
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults -currentHost read com.apple.controlcenter.plist Bluetooth
+result:
+  boolean: 18
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults -currentHost write com.apple.controlcenter.plist Bluetooth -int 18
+  ----
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.1.2 Show Bluetooth status in menu bar (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

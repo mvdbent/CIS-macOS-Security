@@ -1,0 +1,55 @@
+id: cisupdates_current_software
+title: "Verify all Apple-provided software is current (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Software vendors release security patches and software updates for their products when security vulnerabilities are discovered. There is no simple way to complete this action without a network connection to an Apple software repository. Please ensure appropriate access for this control. This check is only for what Apple provides through software update.
+
+  Software updates should be run at minimum every 30 days. Run the following command yo verify when software update was previously ran: 
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/bin/defaults read /Library/Preferences/com.apple.SoftwareUpdate | grep -e LastFullSuccessfulDate
+  ----
+  The response should be in the last 30 days (Example): 
+  [source,bash]
+  ----
+  LastFullSuccessfulDate = "2020-07-30 12:45:25 +0000";
+  ----
+
+  [discrete]
+  ==== Rationale:
+  It is important that these updates be applied in a timely manner to prevent unauthorized persons from exploiting the identified vulnerabilities.
+
+  [IMPORTANT]
+  ====
+  Missing patches can lead to more exploit opportunities.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/sbin/softwareupdate --list | grep -c "*"
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  /usr/sbin/softwareupdate --install --restart --all
+  ----
+  The system may need to be restarted for the update to take effect.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 1.1 Verify all Apple-provided software is current (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,62 @@
+id: cisicloud_sync_disable
+title: "iCloud Drive Document and Desktop sync"
+discussion: |
+  [discrete]
+  ==== Description:
+  With macOS 10.12 Apple introduced the capability to have a user's Desktop and Documents folders automatically synchronize to the user's iCloud Drive, providing they have enough room purchased through Apple on their iCloud drive. This capability mirrors what Microsoft is doing with the use of OneDrive and Office 365. There are concerns with using this capability.
+  
+  The storage space that Apple provides for free is used by users with iCloud mail, all of a user's Photo Library created with the ever larger Multi-Pixel iPhone cameras and all of the iOS Backups. Adding a synchronization capability for users who have files going back a decade or more and storage may be tight without much larger Apple charges than the free 5GB. Users with multiple computers running 10.12 and above with unique content on each will have issues as well.
+  
+  Enterprise users may not be allowed to store Enterprise information in a third party public cloud. In previous implementations iCloud Drive or even DropBox the user selected what files were synchronized even if there were no other controls. The new feature synchronizes all files in a folder widely used to put working files.
+  
+  The automatic synchronization of all files in a user's Desktop and Documents folders should be disabled.
+  
+  https://derflounder.wordpress.com/2016/09/23/icloud-desktop-and-documents-in- macos-sierra-the-good-the-bad-and-the-ugly/
+  
+  [discrete]
+  ==== Rationale:
+  Automated Document synchronization should be planned and controlled to approved storage.
+  
+  [IMPORTANT]
+  ====
+  Users will not be able to use iCloud for the automatic sync of the Desktop and Documents folders.
+  ====
+  
+  [discrete]
+  ==== Audit: 
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'allowCloudDesktopAndDocuments = 0'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85292-1
+  cci:
+    - N/A
+  800-53r4:
+    - CM-7
+    - AC-20
+    - AC-20(1)
+  srg:
+    - SRG-OS-000095-GPOS-00049
+    - SRG-OS-000370-GPOS-00155
+  disa_stig:
+    - N/A
+  800-171r2:
+    - 3.1.20
+    - 3.4.6
+  custom:
+    CIS:
+    - 2.6.4 iCloud Drive Document and Desktop sync (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: true
+mobileconfig_info:
+  com.apple.applicationaccess:
+    allowCloudDesktopAndDocuments: false

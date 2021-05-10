@@ -1,0 +1,31 @@
+id: supplemental_permissions
+title: "Repairing permissions is no longer needed (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  With the introduction of System Integrity Protection (SIP) Apple has removed the necessity of repairing permissions. In earlier versions of the Operating System repair permissions checked the receipt files of installed software and ensured that the existing permissions in the file system matched what the receipts said it should. System integrity protection manages and blocks permission to certain directories continuously.
+
+  http://www.macissues.com/2015/10/02/about-os-x-10-11-el-capitan-and-permissions-fixes/
+  
+  https://en.wikipedia.org/wiki/System_Integrity_Protection
+  
+  http://www.infoworld.com/article/2988096/mac-os-x/sorry-unix-fans-os-x-el-capitan-kills-root.html
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 7.3 Repairing permissions is no longer needed (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

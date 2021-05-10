@@ -1,0 +1,58 @@
+id: cisicloud_drive_disable
+title: "iCloud Drive"
+discussion: |
+  [discrete]
+  ==== Description:
+  iCloud Drive is Apple's storage solution for applications on both macOS and iOS to use the same files that are resident in Apple's cloud storage. The iCloud Drive folder is available much like Dropbox, Microsoft OneDrive or Google Drive.
+  
+  One of the concerns in public cloud storage is that proprietary data may be inappropriately stored in an end user's personal repository. Organizations that need specific controls on information should ensure that this service is turned off or the user knows what information must be stored on services that are approved for storage of controlled information.
+  
+  [discrete]
+  ==== Rationale:
+  Organizations should review third party storage solutions pertaining to existing data confidentiality and integrity requirements.
+  
+  [IMPORTANT]
+  ====
+  Users will not be able to use continuity on macOS to resume the use of newly composed but unsaved files
+  ====
+  
+  [discrete]
+  ==== Audit: 
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'allowCloudDocumentSync = 0'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85286-3
+  cci:
+    - CCI-000381
+    - CCI-001774
+  800-53r4:
+    - CM-7
+    - AC-20
+    - AC-20(1)
+  srg:
+    - SRG-OS-000095-GPOS-00049
+    - SRG-OS-000370-GPOS-00155
+  disa_stig:
+    - APPL-11-002041
+  800-171r2:
+    - 3.1.20
+    - 3.4.6
+  custom:
+    CIS:
+    - 2.6.3 iCloud Drive (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.applicationaccess:
+    allowCloudDocumentSync: false

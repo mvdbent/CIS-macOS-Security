@@ -1,0 +1,64 @@
+id: cissharing_bluetooth_sharing_disable
+title: "Disable Bluetooth Sharing"
+discussion: |
+  [discrete]
+  ==== Description:
+  Bluetooth Sharing allows files to be exchanged with Bluetooth enabled devices.
+  
+  [discrete]
+  ==== Rationale:
+  Disabling Bluetooth Sharing minimizes the risk of an attacker using Bluetooth to remotely attack the system.
+  
+  [IMPORTANT]
+  ====
+  Control 2.1.1 discusses disabling Bluetooth if no paired devices exist. There is a general expectation that Bluetooth peripherals will be used by most users in Apple's ecosystem, it is possible that sharing is required and Bluetooth peripherals are not. Bluetooth must be enabled if sharing is an acceptable use case.
+  ====
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+  
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults -currentHost read com.apple.Bluetooth PrefKeyServicesEnabled
+result:
+  boolean: 0
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults -currentHost write com.apple.Bluetooth PrefKeyServicesEnabled -bool false
+  ----
+references:
+  cce:
+    - CCE-85421-6
+  800-53r4: 
+    - AC-3
+    - AC-18
+    - AC-18(4)
+    - CM-7(1)
+  srg: 
+    - SRG-OS-000480-GPOS-00227
+  disa_stig: 
+    -
+  800-171r2:
+    - 3.1.1
+    - 3.1.2
+    - 3.1.16
+    - 3.4.7
+  custom:
+    CIS:
+    - 2.4.7 Disable Bluetooth Sharing (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

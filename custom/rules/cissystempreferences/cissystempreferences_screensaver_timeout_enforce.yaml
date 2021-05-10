@@ -1,0 +1,51 @@
+id: cissystempreferences_screensaver_timeout_enforce
+title: "Set an inactivity interval of 20 minutes or less for the screen saver"
+discussion: |
+  [discrete]
+  ==== Description:
+  A locking screensaver is one of the standard security controls to limit access to a computer and the current user's session when the computer is temporarily unused or unattended. In macOS the screensaver starts after a value selected in a drop down menu, 10 minutes and 20 minutes are both options and either is acceptable. Any value can be selected through the command line or script but a number that is not reflected in the GUI can be problematic. 20 minutes is the default for new accounts.
+  
+  [discrete]
+  ==== Rationale:
+  Setting an inactivity interval for the screensaver prevents unauthorized persons from viewing a system left unattended for an extensive period of time.
+  
+  [IMPORTANT]
+  ==== 
+  If the screensaver is not set users may leave the computer available for an unauthorized person to access information.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'idleTime = 1200'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85444-8
+  cci: 
+    - CCI-000057*
+  800-53r4: 
+    - AC-11
+  srg: 
+    - SRG-OS-000029-GPOS-00010
+  disa_stig: 
+    - APPL-11-000004
+  800-171r2:
+    - 3.1.10
+  custom:
+    CIS:
+    - 2.3.1 Set an inactivity interval of 20 minutes or less for the screen saver (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.screensaver:
+    idleTime: 1200    

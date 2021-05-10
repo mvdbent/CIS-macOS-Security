@@ -1,0 +1,60 @@
+id: cissecurity_personalized_advertising_disable
+title: "Disable Personalized Advertising"
+discussion: |
+  [discrete]
+  ==== Description:
+  Apple provides a framework that allows advertisers to target Apple users and end-users to with advertisements. While many people prefer that when they see advertising it is relevant to them and their interests the detailed information that is available with data mining collected information available in repositories to advertisers is often disconcerting, this information is valuable to both advertisers and attackers and has been used with other metadata to reveal user's identities.
+
+  Organizations should manage advertising settings on computers rather than allow users to configure the settings.
+
+  Apple Information
+
+  Ad tracking should be limited on 10.15 and prior.
+
+  Personalized Ads should should be disabled on macOS 11.
+
+  [discrete]
+  ==== Rationale:
+  Organizations should manage user privacy settings on managed devices to align with organizational policies and user data protection requirements.
+
+  [IMPORTANT]
+  ====
+  Uses will see generic advertising rather than targeted advertising. Apple warns that this will reduce the number of relevant ads.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'allowApplePersonalizedAdvertising = 0;'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85438-0
+  cci: 
+    - N/A
+  800-53r4: 
+    - AC-20
+    - CM-7
+  srg: 
+    - N/A
+  disa_stig: 
+    - N/A
+  800-171r2:
+    - 3.1.20
+    - 3.4.6
+  custom:
+    CIS:
+    - 2.5.7 Limit Ad tracking and personalized Ads (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.AdLib:
+    allowApplePersonalizedAdvertising: false

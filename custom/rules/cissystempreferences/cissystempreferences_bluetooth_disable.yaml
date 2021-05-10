@@ -1,0 +1,53 @@
+id: cissystempreferences_bluetooth_disable
+title: "Turn off Bluetooth, if no paired devices exist"
+discussion: |
+  [discrete]
+  ==== Description:
+  Bluetooth devices use a wireless communications system that replaces the cables used by other peripherals to connect to a system. It is by design a peer-to-peer network technology and typically lacks centralized administration and security enforcement infrastructure.
+  
+  [discrete]
+  ==== Rationale:
+  Bluetooth is particularly susceptible to a diverse set of security vulnerabilities involving identity detection, location tracking, denial of service, unintended control and access of data and voice channels, and unauthorized device control and data access.
+
+  [IMPORTANT]
+  ====
+  There have been many Bluetooth exploits , while Bluetooth can be hardened it does create a local wireless network that can be attacked to compromise both devices and information. Apple has emphasized the ease of use in Bluetooth devices so it is generally expected that Bluetooth will be used. Turning off Bluetooth with this control will also disable the Bluetooth sharing capability that is more strongly recommended against in control 2.4.7. 
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'DisableBluetooth = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85420-8
+  cci: 
+    - CCI-002418
+  800-53r4: 
+    - AC-18(3)
+    - SC-8
+  srg: 
+    - SRG-OS-000481-GPOS-000481
+  disa_stig: 
+    - APPL-11-002062
+  800-171r2:
+    - 3.13.8
+  custom:
+    CIS:
+    - 2.1.1 Turn off Bluetooth, if no paired devices exist (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "low"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.ManagedClient.preferences:
+    com.apple.MCXBluetooth:
+      DisableBluetooth: true

@@ -1,0 +1,43 @@
+id: cissystempremissions_system_worldwritablefiles
+title: "Check System folder for world writable files (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Software sometimes insists on being installed in the /System/Volumes/Data/System Directory and have inappropriate world writable permissions.
+
+  [discrete]
+  ==== Rationale:
+  Folders in /System/Volumes/Data/System should not be world writable. The audit check excludes the "Drop Box" folder that is part of Apple's default user template.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/find /System/Volumes/Data/System -type d -perm -2 -ls | /usr/bin/grep -c "*"
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  IFS=$'\n'
+  for sysPermissions in $( /usr/bin/find /System/Volumes/Data/System -type d -perm -2 -ls | /usr/bin/grep -v "Public/Drop Box" ); do
+    /bin/chmod -R o-w "$sysPermissions"
+  done
+  unset IFS
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.1.3 Check System folder for world writable files (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,31 @@
+id: supplemental_screentime
+title: "Screen Time (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Screen Time is Apple's technology monitoring application for the entire family and for educational markets. It replaces Parental Controls and allows for an administrator to manage usage patterns and access across macOS and iOS based on Apple IDs. While this is far more useful for parents to manage multiple device uses across Apple platforms, it is less designed as a macOS management platform for avoiding the use of profile management on Enterprise controlled Macs.
+
+  While there are many interesting statistics that even users might want to monitor for usage patterns they are mainly interesting for data mining HR departments, especially residential home HR departments where the employees are under age, rather than enterprise device security.
+
+  https://www.imore.com/parental-controls-mac-ultimate-guide
+  
+  https://thecybersafetylady.com.au/2019/10/new-parental-controls-for-apple-mac-p-cs-catalina/
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 7.11 Screen Time (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

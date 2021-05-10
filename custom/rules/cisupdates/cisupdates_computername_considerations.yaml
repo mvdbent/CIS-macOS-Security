@@ -1,0 +1,55 @@
+id: cisupdates_computername_considerations
+title: "Computer Name Considerations"
+discussion: |
+  [discrete]
+  ==== Description:
+  If the computer is used in an organization that assigns host names, it is a good idea to change the computer name to the host name. This is more of a best practice than a security measure. If the host name and the computer name are the same, computer support may be able to track problems down more easily.
+
+  Standard naming patterns avoid collisions and mitigate risk for computer users.
+  
+  With mobile devices using DHCP IP tracking has serious drawbacks, hostname or computer name tracking makes much more sense for those organizations that can implement it. If the computer is using different names for the "Computer Name" DNS and Directory environments it can be difficult to manage Macs in an Enterprise asset inventory.
+  
+  Find your computer’s name and network address on Mac 
+  
+  https://uberagent.com/blog/choosing-macos-computer-names-wisely/ 
+  
+  Change your computer’s name or local hostname on Mac
+
+  [discrete]
+  ==== Rationale:
+  Part of IT security is having visibility into all of the devices that the organization is responsible for. Without a complete inventory it is impossible to ensure all security controls are met on all organizational devices.
+
+  Default macOS naming deconfliction controls can create issues for appropriate management and tracking as well as privacy exposure. By default the name of a macOS computer is derived from the first user created. If the user has multiple computers or an image is used without an appropriate name change will be multiple computers with names derived from the same user for discovery deconfliction. How many "Ron Colvin's MacBook Pro" should there be, are any missing?
+
+  Local network auto renaming to avoid collisions also allows for the enumeration of local computer names. Computers should not be named after their users, especially on untrusted networks. For social engineering purposes the computer name should not provide a full name of the user or an identifiable name that might be used to assist in targeted user attacks.
+
+  A documented plan to better enable a complete device inventory without exposing user or organizational information is part of mature security.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/sbin/scutil --get ComputerName
+result:
+  String: Not Empty
+fix: |
+  [source,bash]
+  ----
+  /usr/sbin/scutil --set ComputerName <ComputerName>
+  ----
+  Set variable <ComputerName> to preferred naming convention
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 1.7 Computer Name Considerations (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

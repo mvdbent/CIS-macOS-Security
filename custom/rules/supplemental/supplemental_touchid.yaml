@@ -1,0 +1,25 @@
+id: supplemental_touchid
+title: "Touch ID (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Apple has integrated Touch ID with macOS and allows fingerprint use for many common operations. All use of Touch ID requires the presence of a password and the use of that password after every reboot or where it has been more than 48 hours since the device was last unlocked.
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 7.9 Touch ID (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

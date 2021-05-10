@@ -1,0 +1,70 @@
+id: cissecurity_location_services_monitor
+title: "Monitor Location Services Access"
+discussion: |
+  [discrete]
+  ==== Description:
+  macOS uses location information gathered through local Wi-Fi networks to enable applications to supply relevant information to users. While location services may be very useful, it may not be desirable to allow all applications that can use location services to use your location for Internet queries to provide tailored content based on your current location.
+
+  Ensure that the applications that can use Location Services are authorized to use that information and provide that information where the application interacts with external systems. Apple provides feedback within System Preferences and may be enabled to provide information on the menu bar when Location Services are used.
+
+  Safari can deny access from websites or prompt for access.
+  Applications that support Location Services can be individually controlled in the Privacy tab in Security & Privacy under System Preferences.
+
+  Access should be evaluated to ensure that privacy controls are as expected.
+
+  [discrete]
+  ==== Rationale:
+  Privacy controls should be monitored for appropriate settings
+
+  [IMPORTANT]
+  ====
+  Many macOS services rely on location services for tailored services. Users expect their time zone and weather to be relevant to where they are without manual intervention. Find my Mac does need to know where your Mac actually is. Where possible the tolerance between location privacy and convenience may be best left to the user when the location itself is not sensitive. If facility locations are not public location information should be tightly controlled
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/defaults read /var/db/locationd/clients.plist | grep -c "Authorized"
+result:
+  boolean: 0
+fix: |
+  Perform the following to disable unnecessary applications from accessing location services:
+  
+  1. Open System Preferences
+  2. Select Security & Privacy
+  3. Select Privacy
+  4. Select Location Services
+  5. Uncheck applications that are not approved for access to location service information
+
+  Perform the following to set websites to ask for permission to access location services:
+  
+  1. Open Safari
+  2. Select Safari from the menu bar
+  3. Select Websites
+  4. Select Location
+  5. Set When visiting other websites to Ask or Deny
+references:
+  cce:
+    - CCE-85434-9
+  cci: 
+    - CCI-000381
+  800-53r4: 
+    - CM-7
+  srg: 
+    - SRG-OS-000095-GPOS-00049
+  disa_stig: 
+    - APPL-11-002004
+  800-171r2:
+    - 3.4.6
+  custom:
+    CIS:
+    - 2.5.5 Monitor Location Services Access (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,46 @@
+id: cissecurity_location_services_enable
+title: "Enable Location Services"
+discussion: |
+  [discrete]
+  ==== Description:
+  macOS uses location information gathered through local Wi-Fi networks to enable applications to supply relevant information to users. Users do not need to change the time or the time zone, the computer will do it for them. They do not need to specify their location for weather or travel times and even get alerts on travel times to meetings and appointment where location information is supplied.
+  
+  Location services simplify some processes, for the purpose of asset management and time and log management, with mobile computers.
+  
+  There are some use cases where it is important that the computer not be able to report it's exact location. While the general use case is to enable Location Services, it should not be allowed if the physical location of the computer and the user should not be public knowledge.
+  
+  https://support.apple.com/en-us/HT204690
+  
+  [discrete]
+  ==== Rationale:
+  Location services are helpful in most use cases and can simplify log and time management where computers change time zones.
+  
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/defaults read /var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.plist LocationServicesEnabled
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/defaults write /var/db/locationd/Library/Preferences/ByHost/com.apple.locationd LocationServicesEnabled -bool true
+  /bin/launchctl kickstart -k system/com.apple.locationd
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.5.4 Enable Location Services (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

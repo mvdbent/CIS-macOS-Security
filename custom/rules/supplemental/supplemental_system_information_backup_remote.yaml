@@ -1,0 +1,29 @@
+id: supplemental_system_information_backup_remote
+title: "System information backup to remote computers (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  It is best practice to ensure that local computers are not a single point of failure for logging and auditing records about activity on the computer itself. Whether end user activity or system process information a mechanism should be in place to transfer the logs to another system that is hardened to receive them. A hardened log host reduces the risk of failure or compromise, particularly with user end points. From an enterprise management standpoint those records should be reviewed to ensure that there is not a common exploitable vulnerability, system bug or even hardware issue that can affect other devices in the environment.
+
+  With changes in Apple's logging methods in the last few years third party tools appear to be preferred to ensure logs and records are obtained appropriately. Aggressive retention likely requires more space than available on built-in SSDs even if offline Time Machine backups are large and pristine.
+  
+  Please ensure that solutions to capture and retain log and audit records are in place.
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 7.6 System information backup to remote computers (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

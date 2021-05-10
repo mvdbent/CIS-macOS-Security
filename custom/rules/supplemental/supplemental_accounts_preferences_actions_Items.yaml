@@ -1,0 +1,21 @@
+id: supplemental_accounts_preferences_actions_Items
+title: "Accounts Preferences Action Items"
+discussion: |
+  Proper account management is critical to computer security. Many options and settings in the Account System Preference Pane can be used to increase the security of the Mac.
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 6.1 Accounts Preferences Action Items
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+mobileconfig: false
+mobileconfig_info:

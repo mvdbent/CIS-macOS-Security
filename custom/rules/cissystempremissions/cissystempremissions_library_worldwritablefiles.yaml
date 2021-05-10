@@ -1,0 +1,43 @@
+id: cissystempremissions_library_worldwritablefiles
+title: "Check Library folder for world writable files (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Software sometimes insists on being installed in the /Library Directory and have inappropriate world writable permissions.
+
+  [discrete]
+  ==== Rationale:
+  Folders in /System/Volumes/Data/Library should not be world writable. The audit check excludes the /System/Volumes/Data/Library/Caches and /System/Volumes/Data/Library/Preferences/Audio/Data folders where the sticky bit is set.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/find /System/Volumes/Data/Library -type d -perm -2 -ls | /usr/bin/grep -v Caches | /usr/bin/grep -v Audio | /usr/bin/wc -l
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  IFS=$'\n'
+  for libPermissions in $( /usr/bin/find /System/Volumes/Data/Library -type d -perm -2 | /usr/bin/grep -v Caches | usr/bin/grep -v Audio ); do
+    /bin/chmod -R o-w "$libPermissions"
+  done
+  unset IFS
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.1.4 Check Library folder for world writable files (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

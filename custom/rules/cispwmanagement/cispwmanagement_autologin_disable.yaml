@@ -1,0 +1,54 @@
+id: cispwmanagement_autologin_disable
+title: "Disable automatic login (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  The automatic login feature saves a user's system access credentials and bypasses the login screen, instead the system automatically loads to the user's desktop screen.
+
+  [discrete]
+  ==== Rationale:
+  Disabling automatic login decreases the likelihood of an unauthorized person gaining access to a system.
+  
+  [IMPORTANT]
+  ====
+  If Automatic login is not disabled an unauthorized user could gain access to the system without supplying any credentials.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: | 
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'DisableFDEAutoLogin = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85310-1
+  800-53r4:
+    - AC-2(11)
+    - AC-3
+    - IA-5(13)
+  srg: 
+    - SRG-OS-000480-GPOS-00227
+  disa_stig:
+    - APPL-11-000033
+  cci:
+    - CCI-002143
+  800-171r2:
+    - 3.1.1
+    - 3.1.2
+  custom:
+    CIS:
+    - 5.8 Disable automatic login (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.loginwindow:
+    DisableFDEAutoLogin: true

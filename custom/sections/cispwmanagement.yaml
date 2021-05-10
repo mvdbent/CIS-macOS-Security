@@ -1,0 +1,17 @@
+  name: "Password Management"
+  description: |
+    Password security is an important part of general IT security where passwords are in use. For macOS passwords are still much more widely used than other methods for account access. While there are other authentication and authorization methods for access from a macOS computer to organizational services, console access to the Mac is probably done using a password. This section contains password controls.
+    
+    Recent updates based on research by NIST in SP800-63 call in to question traditional password complexity and rotation requirements. Sticky notes are not a password management program and password vault APIs are under increasing attack and ideally the user will remember their important passwords. The new understanding has informed changes to the previous password recommendations.
+    
+    Length, Threshold and a yearly rotation requirement are the only scored controls below. Other controls will remain as unscored options. Passwords used for macOS are likely to also function as encryption keys for FileVault and depending on the information confidentiality on FileVault volumes stronger passwords may be required than are necessary to pass the controls in this Benchmark.
+    
+    Apple supported solutions for managing local passwords on macOS are to use either an XML file that contains password rules that are imported with pwpolicy or through the use of a profile. In either case the controls in this section can be implemented with organizationally approved password policy.
+    
+    Content is available where security hardening content is available and is native to Management suites and MDM tools.
+    
+    Content also available here: https://github.com/ronc-LAemigre/macos-sec-config 
+    
+    NIST guidance on passwords starting at 5.1.1.1 
+    
+    https://pages.nist.gov/800-63-3/sp800-63b.html

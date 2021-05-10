@@ -1,0 +1,56 @@
+id: cispwmanagement_lower_case_character_enforce
+title: "Complex passwords must uppercase and lowercase letters (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Complex passwords contain one character from each of the following classes: English uppercase letters, English lowercase letters, Westernized Arabic numerals, and non- alphanumeric characters.
+  
+  Ensure that both uppercase and lowercase letters are part of the password policy on the computer
+
+  [discrete]
+  ==== Rationale:
+  The more complex a password the more resistant it will be against persons seeking unauthorized access to a system.
+  
+  [IMPORTANT]
+  ====
+  Password policy should be in effect to reduce the risk of exposed services being compromised easily through dictionary attacks or other social engineering attempts.
+  ====
+
+  [discrete]
+  ==== Audit: 
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'requiresMixedCase = 1'
+result:
+  integer: 1
+fix: |
+    This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85408-3
+  cci: 
+   - CCI-000193
+  800-53r4: 
+    - IA-5
+    - IA-5(1)
+  srg: 
+   - SRG-OS-000070-GPOS-00038
+  800-171r2:
+    - 3.5.1
+    - 3.5.2
+    - 3.5.7
+    - 3.5.8
+    - 3.5.9
+    - 3.5.10
+  custom:
+    CIS:
+    - 5.2.6 Complex passwords must uppercase and lowercase letters (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: true
+mobileconfig_info:
+  com.apple.mobiledevice.passwordpolicy:
+    requiresMixedCase: true

@@ -1,0 +1,46 @@
+id: cisupdates_auto_update
+title: "Enable Auto Update"
+discussion: |
+  [discrete]
+  ==== Description:
+  Auto Update verifies that your system has the newest security patches and software updates. If "Automatically check for updates" is not selected background updates for new malware definition files from Apple for XProtect and Gatekeeper will not occur.
+
+  http://macops.ca/os-x-admins-your-clients-are-not-getting-background-security-updates/
+  
+  https://derflounder.wordpress.com/2014/12/17/forcing-xprotect-blacklist-updates-on-mavericks-and-yosemite/
+
+  [discrete]
+  ==== Rationale:
+  It is important that a system has the newest updates applied so as to prevent unauthorized persons from exploiting identified vulnerabilities.
+
+  [IMPORTANT]
+  ====
+  Without automatic update, updates may not be made in a timely manner and the system will be exposed to additional risk.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'AutomaticCheckEnabled = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 1.2 Enable Auto Update (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.SoftwareUpdate:
+    AutomaticCheckEnabled: true

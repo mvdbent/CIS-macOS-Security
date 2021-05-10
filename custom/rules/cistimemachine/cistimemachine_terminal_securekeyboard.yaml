@@ -1,0 +1,37 @@
+id: cistimemachine_terminal_securekeyboard
+title: "Enable Secure Keyboard Entry in terminal.app (Automated)"
+discussion: |
+  [discrete]
+  ==== Description: 
+  Secure Keyboard Entry prevents other applications on the system and/or network from detecting and recording what is typed into Terminal.
+  
+  [discrete]
+  ==== Rationale:
+  Enabling Secure Keyboard Entry minimizes the risk of a key logger from detecting what is entered in Terminal.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -Ec '(SecureKeyboardEntry = 1)'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.10 Enable Secure Keyboard Entry in terminal.app (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.Terminal:
+    SecureKeyboardEntry: true

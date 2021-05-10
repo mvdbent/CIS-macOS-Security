@@ -1,0 +1,50 @@
+id: cispwmanagement_root_disable
+title: 'Do not enable the "root" account (Automated)'
+discussion: |
+  [discrete]
+  ==== Description:
+  The root account is a superuser account that has access privileges to perform any actions and read/write to any file on the computer. With some Linux distros the system administrator may commonly use the root account to perform administrative functions.
+
+  [discrete]
+  ==== Rationale:
+  Enabling and using the root account puts the system at risk since any successful exploit or mistake while the root account is in use could have unlimited access privileges within the system. Using the sudo command allows users to perform functions as a root user while limiting and password protecting the access privileges. By default the root account is not enabled on a macOS computer. An administrator can escalate privileges using the sudo command (use -s or -i to get a root shell).
+
+  [IMPORTANT]
+  ====
+  Some legacy posix software might expect an available root account.
+  ====
+  
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/dscl . -read /Users/root UserShell 2>&1 | /usr/bin/grep -c "/usr/bin/false"
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/dscl . -create /Users/root UserShell /usr/bin/false
+  ----
+references:
+  cce:
+    - CCE-85374-7
+  cci:
+    - N/A    
+  800-53r4:
+    - IA-2
+    - IA-2(5)
+  800-171r2:
+    - 3.5.1
+    - 3.5.2
+  custom:
+    CIS:
+    - 5.7 Do not enable the "root" account (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,60 @@
+id: cispwmanagement_timestamp_user_tty
+title: "Use a separate timestamp for each user/tty combo (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Using tty tickets ensures that a user must enter the sudo password in each Terminal session.
+  
+  With sudo versions 1.8 and higher, introduced in 10.12, the default value is to have tty tickets for each interface so that root access is limited to a specific terminal. The default configuration can be overwritten or not configured correctly on earlier versions of macOS.
+
+  [discrete]
+  ==== Rationale:
+  In combination with removing the sudo timeout grace period, a further mitigation should be in place to reduce the possibility of a background process using elevated rights when a user elevates to root in an explicit context or tty.
+  
+  Additional mitigation should be in place to reduce the risk of privilege escalation of background processes.
+ 
+  [IMPORTANT]
+  ====
+  This control should have no user impact. Developers or installers may have issues if background processes are spawned with different interfaces than where sudo was executed.
+  ====
+
+  [discrete]
+  ==== Audit:
+  Run the following commands to verify that the default sudoers controls are in place with explicit tickets per tty.
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/bin/grep -E -s '!tty_tickets' /etc/sudoers /etc/sudoers.d/*
+  ----
+  Nothing should be returned
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/bin/grep -E -s 'timestamp_type' /etc/sudoers /etc/sudoers.d/*
+  ----
+  Ensure that nothing is returned or that the output does not include timestamp_type=ppid or timestamp_type=global
+
+check: |
+  /usr/bin/grep -c tty_tickets /etc/sudoers
+result:
+  boolean: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/sudo sed -i '.old' '/Default !tty_tickets/d' /etc/sudoers && /usr/bin/sudo /bin/chmod 644 /etc/sudoers && /usr/bin/sudo /usr/sbin/chown root:wheel /etc/sudoers
+  ----
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.5 Use a separate timestamp for each user/tty combo (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

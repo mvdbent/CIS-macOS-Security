@@ -1,0 +1,50 @@
+id: cispwmanagement_secure_individual_keychains
+title: "Secure individual keychains and items (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  By default, the keychain for an account, especially a local account, have the same password as the account's login password. It is possible to change the passwords on keychains to something different than the login password, and doing so would keep that keychain locked until needed after login. This is especially important when a smartcard is being used for console login. Keychains need to be protected by more than a pin in order to be secured and the default behavior with a smartcard will result in a pin for the login password. Individual keychain entries can have special ACLs to increase security as well.
+
+  [discrete]
+  ==== Rationale:
+  Each keychain entry can have different access controls. It's possible to set the keychain item to require a keychain password every time an item is accessed, even if the keychain is unlocked. This level of security could be useful for bank passwords or other passwords that need extra security.
+  
+  [IMPORTANT]
+  ====
+  Having to enter the keychain password for each access could become inconvenient and/or tedious for users.
+  ====
+
+  [discrete]
+  ==== Audit:
+
+  The supplemental guidance found in this section is applicable for the following rules:
+
+    1. Open Utilities
+    2. Select Keychain Access
+    3. Double-click keychain
+    4. Select Access Control
+    5. Verify if the box next to "Ask for Keychain Password" is checked
+check: |
+  # N/A
+fix: |
+    1. Open Utilities
+    2. Select Keychain Access
+    3. Double-click keychain
+    4. Select Access Control
+    5. Check box next to "Ask for Keychain Password"
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 5.17 Secure individual keychains and items (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

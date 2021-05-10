@@ -1,0 +1,56 @@
+id: cispwmanagement_account_lockout_enforce
+title: "Configure account lockout threshold (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  The account lockout threshold specifies the amount of times a user can enter an incorrect password before a lockout will occur.
+  
+  Ensure that a lockout threshold is part of the password policy on the computer
+
+  [discrete]
+  ==== Rationale:
+  The account lockout feature mitigates brute-force password attacks on the system.
+  
+  [IMPORTANT]
+  ====
+  The number of incorrect log on attempts should be reasonably small to minimize the possibility of a successful password attack, while allowing for honest errors made during a normal user log on.
+  
+  The locked account will auto-unlock after a few minutes when bad password attempts stop. The computer will accept the still valid password if remembered or recovered.
+  ====
+
+  [discrete]
+  ==== Audit:
+  Run the following command to verify that the number of failed attempts is less than or equal to 5
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'maxFailedAttempts = 5' 
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85402-6
+  cci:
+    - CCI-002238
+  800-53r4: 
+    - AC-7
+  srg: 
+    - SRG-OS-000329-GPOS-00128
+  disa_stig: 
+    - APPL-11-000022
+  800-171r2:
+    - 3.1.8
+  custom:
+    CIS:
+    - 5.2.1 Configure account lockout threshold (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.mobiledevice.passwordpolicy:
+    maxFailedAttempts: 5

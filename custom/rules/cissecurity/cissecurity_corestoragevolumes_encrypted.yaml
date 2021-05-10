@@ -1,0 +1,44 @@
+id: cissecurity_corestoragevolumes_encrypted
+title: "Ensure all user storage CoreStorage volumes are encrypted"
+discussion: |
+  [discrete]
+  ==== Rationale:
+  Apple introduced Core Storage with 10.7. It is used as the default for formatting on macOS volumes prior to 10.13.
+
+  All HFS and Core Storage Volumes should be encrypted  
+
+  [discrete]
+  ==== Description:
+  In order to protect user data from loss or tampering volumes carrying data should be encrypted
+
+  [IMPORTANT]
+  ====
+  While FileVault protects the boot volume data may be copied to other attached storage and reduce the protection afforded by FileVault. Ensure all user volumes are encrypted to protect data.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  LFV=$(/usr/sbin/diskutil cs list | grep "Logical Volume Family" | awk '/Logical Volume Family/ {print $5}')
+
+  /usr/sbin/diskutil cs "$LFV" | awk '/Conversion Status/ {print $3}'
+result:
+  string: Complete
+fix: |
+  Ensure all user CoreStorage volumes encrypted
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.5.1.3 Ensure all user storage CoreStorage volumes are encrypted (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

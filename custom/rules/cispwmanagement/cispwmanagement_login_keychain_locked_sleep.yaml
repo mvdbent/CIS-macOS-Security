@@ -1,0 +1,64 @@
+id: cispwmanagement_login_keychain_locked_sleep
+title: "Ensure login keychain is locked when the computer sleeps (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  The login keychain is a secure database store for passwords and certificates and is created for each user account on macOS. The system software itself uses keychains for secure storage. Anyone with physical access to an unlocked keychain where the screen is also unlocked can copy all passwords in that keychain. The approach recommended here is that the login keychain be set to lock when the computer sleeps to reduce the risk of password exposure. Organizations that use Firefox and Thunderbird will have a much different tolerance than those organization using keychain aware applications extensively.
+
+  [discrete]
+  ==== Rationale:
+  While logged in, the keychain does not prompt the user for passwords for various systems and/or programs. This can be exploited by unauthorized users to gain access to password protected programs and/or systems in the absence of the user.
+
+  [IMPORTANT]
+  ====
+  The user may experience multiple prompts to unlock the keychain when waking from sleep.
+  ====
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+  
+  [discrete]
+  ==== Audit:
+  For each user, run the following command to unlock the keychain and verify it locks on sleep
+  [source,bash]
+  ----
+  $ /usr/bin/sudo -u "$CURRENT_USER" /etc/security unlock-keychain /Users/"$CURRENT_USER"/Library/Keychains/login.keychain
+  $ /usr/bin/sudo -u "$CURRENT_USER" /etc/security show-keychain-info /Users/"$CURRENT_USER"/Library/Keychains/login.keychain
+  ----
+  The output should contain lock-on-sleep, example:
+  [source,bash]
+  ----
+  Keychain "/Users/"$CURRENT_USER"/Library/Keychains/login.keychain" lock-on-sleep timeout=21600s
+  ----
+check: |
+  /etc/security show-keychain-info /Users/"$CURRENT_USER"/Library/Keychains/login.keychain | grep -c "lock-on-sleep"
+result:
+  boolean: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /etc/security set-keychain-settings -l /Users/"$CURRENT_USER"/Library/Keychains/login.keychain
+  ----
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.6 Ensure login keychain is locked when the computer sleeps (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

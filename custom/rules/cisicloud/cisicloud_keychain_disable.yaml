@@ -1,0 +1,53 @@
+id: cisicloud_keychain_disable
+title: "iCloud keychain"
+discussion: |
+  [discrete]
+  ==== Description:
+  The iCloud keychain is Apple's password manager that works with macOS and iOS. The capability allows users to store passwords in either iOS or macOS for use in Safari on both platforms and other iOS integrated applications. The most pervasive use is driven by iOS use rather than macOS. The passwords stored in a macOS keychain on an Enterprise managed computer could be stored in Apple's cloud and then be available on a personal computer using the same account. The stored passwords could be for organizational as well as for personal accounts.
+  
+  If passwords are no longer being used as organizational tokens they are not in scope for iCloud keychain storage.
+  
+  [discrete]
+  ==== Rationale:
+  Ensure that the iCloud keychain is used consistently with organizational requirements
+  
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'allowCloudKeychainSync = 0'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85287-1
+  cci:
+    - CCI-000381
+    - CCI-001774
+  800-53r4:
+    - CM-7
+    - AC-20
+    - AC-20(1)
+  srg:
+    - SRG-OS-000095-GPOS-00049
+    - SRG-OS-000370-GPOS-00155
+  disa_stig:
+    - APPL-11-002040
+  800-171r2:
+    - 3.1.20
+    - 3.4.6
+  custom:
+    CIS:
+    - 2.6.2 iCloud keychain (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.applicationaccess:
+    allowCloudKeychainSync: false
