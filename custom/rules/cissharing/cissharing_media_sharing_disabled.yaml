@@ -1,0 +1,55 @@
+id: cissharing_media_sharing_disabled
+title: "Disable Media Sharing"
+discussion: |
+  [discrete]
+  ==== Description:
+  Starting with macOS 10.15 Apple has provided a control to allow a user to share Apple downloaded content on all Apple devices that are signed in with the same Apple ID. This allows a user to share downloaded Movies, Music or TV shows with other controlled macOS, iOS and iPadOS devices as well as photos with Apple TVs.
+  
+  With this capability guest users can also use media downloaded on the computer.
+  
+  The recommended best practice is not to use the computer as a server but to utilize Apple's cloud storage to download and use content stored there if content stored with Apple is used on multiple devices.
+  
+  https://support.apple.com/guide/mac-help/set-up-media-sharing-on-mac-mchlp13371337/mac This capability requires the use of mac OS clients as P2P nodes for updated Apple content. Unless there is a business requirement to manage operational Internet connectivity bandwidth user endpoints should not store content and act as a cluster to provision data.
+  
+  [discrete]
+  ==== Rationale:
+  Disabling Media Sharing reduces the remote attack surface of the system.
+  
+  [IMPORTANT]
+  ====
+  Media Sharing allows for pre-downloaded content on a Mac to be available to other Apple devices on the same network. Leaving this disabled forces device users to stream or download content from each Apple authorized device. This sharing could even allow unauthorized devices on the same network media access.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -Ec '(homeSharingUIStatus = 0|legacySharingUIStatus = 0|mediaSharingUIStatus = 1)'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85436-4
+  800-53r4:
+    - AC-3
+  srg: 
+    - SRG-OS-000480-GPOS-00227
+  800-171r2:
+    - 3.1.1
+    - 3.1.2
+  custom:
+    CIS:
+    - 2.4.11 Disable Media Sharing (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: true
+mobileconfig_info:
+  com.apple.preferences.sharing.SharingPrefsExtension:
+    homeSharingUIStatus: 0
+    legacySharingUIStatus: 0
+    mediaSharingUIStatus: 0

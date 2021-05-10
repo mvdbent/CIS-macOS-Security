@@ -1,0 +1,41 @@
+== Overview
+
+This document, CIS Apple macOS 11.0 Benchmark, provides prescriptive guidance for establishing a secure configuration posture for Apple macOS 11.0. 
+
+This guide was tested against Apple macOS 11.0. To obtain the latest version of this guide, please visit http://benchmarks.cisecurity.org. 
+
+If you have questions, comments, or have identified ways to improve this guide, please write us at feedback@cisecurity.org.
+
+**Intended Audience** +
+This document is intended for system and application administrators, security specialists, auditors, help desk, and platform deployment personnel who plan to develop, deploy, assess, or secure solutions that incorporate Apple macOS 11.0.
+
+**Consensus Guidance** +
+This benchmark was created using a consensus review process comprised of subject matter experts. Consensus participants provide perspective from a diverse set of backgrounds including consulting, software development, audit and compliance, security research, operations, government, and legal.
+
+Each CIS benchmark undergoes two phases of consensus review. The first phase occurs during initial benchmark development. During this phase, subject matter experts convene to discuss, create, and test working drafts of the benchmark. This discussion occurs until consensus has been reached on benchmark recommendations. The second phase begins after the benchmark has been published. 
+
+During this phase, all feedback provided by the Internet community is reviewed by the consensus team for incorporation in the benchmark. If you are interested in participating in the consensus process, please visit https://workbench.cisecurity.org/.
+
+**Assessment Status** +
+An assessment status is included for every recommendation. The assessment status indicates whether the given recommendation can be automated or requires manual steps to implement. Both statuses are equally important and are determined and supported as defined below:
+
+**Automated** +
+Represents recommendations for which assessment of a technical control can be fully automated and validated to a pass/fail state. Recommendations will include the necessary information to implement automation.
+
+**Manual** +
+Represents recommendations for which assessment of a technical control cannot be fully automated and requires all or some manual steps to validate that the configured state is set as expected. The expected state can vary depending on the environment.
+
+**Profile Definitions** +
+The following configuration profiles are defined by this Benchmark:
+
+.**Level 1**
+* Items in this profile intend to:
+  - be practical and prudent;
+  - provide a clear security benefit; and
+  - not inhibit the utility of the technology beyond acceptable means.
+
+.**Level 2**
+* This profile extends the "Level 1" profile. Items in this profile exhibit one or more of the following characteristics:
+  - are intended for environments or use cases where security is paramount o acts as defense in depth measure
+  - may negatively inhibit the utility or performance of the technology.
+  

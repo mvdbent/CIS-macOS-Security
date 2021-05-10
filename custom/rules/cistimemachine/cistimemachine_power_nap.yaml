@@ -1,0 +1,53 @@
+id: cistimemachine_power_nap
+title: "Disable Power Nap (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  This feature allows the computer to take action when the user is not present and the computer is in energy saving mode. These tools require FileVault to remain unlocked and fully rejoin known networks. This macOS feature is meant to allow the computer to resume activity as needed regardless of physical security controls.
+  
+  Power Nap allows the system to stay in low power mode, especially while on battery power and periodically connect to previously named networks with stored credentials for user applications to phone home and get updates. This capability requires FileVault to remain unlocked and the use of previously joined networks to be risk accepted based on the SSID without user input
+  
+  This control has been updated to check the status on both battery and AC Power. The presence of an electrical outlet does not completely correlate with logical and physical security of the device or available networks.
+
+  [discrete]
+  ==== Rationale:
+  Disabling this feature mitigates the risk of an attacker remotely waking the system and gaining access.
+  
+  The use of Power Nap adds to the risk of compromised physical and logical security. The user should be able to decrypt FileVault and have the applications download what is required when the computer is actively used.
+  
+  The control to prevent computer sleep has been retired for this version of the Benchmark. Forcing the computer to stay on and use energy in case a management push is needed is contrary to most current management processes. Only keep computers unslept if after hours pushes are required on closed LANs.
+  
+  [IMPORTANT]
+  ==== 
+  Power Nap exists for unattended user application updates like email and social media clients. With Power Nap disabled the computer will not wake and reconnect to known wireless SSIDs intermittently when slept.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/pmset -g custom | /usr/bin/awk '/powernap/ { sum+=$2 } END {print sum}'
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/pmset -a powernap 0
+  ----
+references:
+  cce:
+    - CCE-85439-8
+  800-53r4:
+    - CM-7  
+  800-171r2:
+    - 3.4.6
+  custom:
+    CIS:
+    - 2.9 Disable Power Nap (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

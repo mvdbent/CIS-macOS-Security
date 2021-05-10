@@ -1,0 +1,48 @@
+id: cissystempremissions_permissions_apps
+title: "Check System Wide Applications for appropriate permissions (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Applications in the System Applications Directory (/Applications) should be world executable since that is their reason to be on the system. They should not be world- writable and allow any process or user to alter them for other processes or users to then execute modified versions
+
+  [discrete]
+  ==== Rationale:
+  Unauthorized modifications of applications could lead to the execution of malicious code.
+
+  [IMPORTANT]
+  ====
+  Applications changed will no longer be world-writable
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/find /Applications -iname "*.app" -type d -perm -2 -ls | /usr/bin/grep -c .app
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  IFS=$'\n'
+  for apps in $( /usr/bin/find /Applications -iname "*\.app" -type d -perm -2 ); do
+    /bin/chmod -R o-w "$apps"
+  done
+  unset IFS
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.1.2 Check System Wide Applications for appropriate permissions (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

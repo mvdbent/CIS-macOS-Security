@@ -1,0 +1,42 @@
+id: cisupdates_auto_download
+title: "Enable Download new updates when available"
+discussion: |
+  [discrete]
+  ==== Description: 
+  In the GUI both "Install macOS updates" and "Install app updates from the App Store" are dependent on whether "Download new updates when available" is selected
+  
+  [discrete]
+  ==== Rationale:
+  It is important that a system has the newest updates downloaded so that they can be applied.
+
+  [IMPORTANT]
+  ====
+  Without updates available they may not be made in a timely manner and the system will be exposed to additional risk.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'AutomaticDownload = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 1.3 Enable Download new updates when available (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.SoftwareUpdate:
+    AutomaticDownload: true

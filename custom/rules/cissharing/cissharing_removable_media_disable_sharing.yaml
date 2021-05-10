@@ -1,0 +1,45 @@
+id: cissharing_removable_media_disable_sharing
+title: "Disable DVD or CD Sharing"
+discussion: |
+  [discrete]
+  ==== Description:
+  DVD or CD Sharing allows users to remotely access the system's optical drive. While Apple does not ship Macs with built-in optical drives any longer, external optical drives are still recognized when they are connected. In testing the sharing of an external optical drive persists when a drive is reconnected.
+  
+  [discrete]
+  ==== Rationale:
+  Disabling DVD or CD Sharing minimizes the risk of an attacker using the optical drive as a vector for attack and exposure of sensitive data.
+
+  [IMPORTANT]
+  ====
+  Many Apple devices are now sold without optical drives and drive sharing may be needed for legacy optical media. The media should be explicitly re-shared as needed rather than using a persistent share. Necessary data from optical drives should be copied or images so that the original optical drives are for long term storage only.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /bin/launchctl list | grep -Ec ODSAgent
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  /bin/launchctl unload -w /System/Library/LaunchDaemons/com.apple.ODSAgent.plist
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  800-171r2:
+    - N/A
+  custom:
+    CIS:
+    - 2.4.6 Disable DVD or CD Sharing (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,57 @@
+id: cissecurity_diagnostics_reports_disable
+title: "Disable sending diagnostic and usage data to Apple"
+discussion: |
+  [discrete]
+  ==== Description:
+  Apple provides a mechanism to send diagnostic and analytics data back to Apple to help them improve the platform. Information sent to Apple may contain internal organizational information that should be controlled and not available for processing by Apple. Turn off all Analytics and Improvements sharing.
+  
+  Share Mac Analytics (Share with App Developers dependent on Mac Analytic sharing)
+  • Includes diagnostics, usage and location data 
+  
+  Share iCloud Analytics
+  • Includes iCloud data and usage information 
+  
+  Share analytics information from your Mac with Apple
+  
+  [discrete]
+  ==== Rationale:
+  Organizations should have knowledge of what is shared with the vendor and the setting automatically forwards information to Apple.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -Ec '(allowDiagnosticSubmission = 0|AutoSubmit = 0)'
+result:
+  integer: 2
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85423-2
+  cci: 
+    - CCI-000382
+  800-53r4: 
+    - AC-20
+    - SI-11
+  srg: 
+    - SRG-OS-000096-GPOS-00050
+  disa_stig: 
+    - APPL-11-002021
+  800-171r2:
+    - 3.1.20
+  custom:
+    CIS:
+    - 2.5.6 Disable sending diagnostic and usage data to Apple (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.SubmitDiagInfo:
+    AutoSubmit: false
+  com.apple.applicationaccess:
+    allowDiagnosticSubmission: false

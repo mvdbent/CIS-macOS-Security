@@ -1,0 +1,42 @@
+id: supplemental_sidecar
+title: "Sidecar (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Apple introduced a technology called Sidecar with the release of mac OS 10.15 "Catalina" that allows the use of an Apple iPad as an additional screen. There are no known security issues with the use of Sidecar at the time of the publication of this Benchmark. There are security concerns with some of the underlying technology that allows this feature to work. The Apple support article below has the additional requirements that are reproduced below. So while Sidecar may not have an explicit security concern some organizations may have requirements that block the use of the features required to allow Sidecar to work.
+  
+  https://support.apple.com/en-afri/HT210380
+
+  Additional requirements
+  
+  * Both devices must be signed in to iCloud with the same Apple ID using two-factor authentication.
+  * To use Sidecar wirelessly, both devices must be within 10 meters (30 feet) of each other and have Bluetooth, Wi-Fi, and Handoff turned on. Also make sure that the iPad is not sharing its cellular connection and the Mac is not sharing its Internet connection.
+  * To use Sidecar over USB, make sure that your iPad is set to trust your Mac. Organizations that do not allow the use of iCloud and more specifically Handoff will not be able to use Sidecar.
+  
+  Some organizations may not allow the use of mixed ownership for P2P wireless or USB connections so that unless the organization controls both the Mac and the iPad connections may not be approved and the use of a single Apple ID for distinctly managed devices may be prohibited.
+  
+  Additional Info
+
+  https://www.apple.com/macos/catalina/docs/Sidecar_Tech_Brief_Oct_2019.pdf
+  
+  https://www.pocket-lint.com/laptops/news/apple/148262-apple-sidecar-macos-ipados-features-explained
+
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 7.10 Sidecar (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,64 @@
+id: cispwmanagement_policy_banner_loginwindow_enforce
+title: "Create a Login window banner (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  A Login window banner warning informs the user that the system is reserved for authorized use only. It enforces an acknowledgment by the user that they have been informed of the use policy in the banner if required. The system recognizes either the .txt and the .rtf formats.
+
+  [discrete]
+  ==== Rationale:
+  An access warning may reduce a casual attacker's tendency to target the system. Access warnings may also aid in the prosecution of an attacker by evincing the attacker's knowledge of the system's private status, acceptable use policy, and authorization requirements.
+  
+  [IMPORTANT]
+  ====
+  Users will have to click on the window with the Login text before logging into the computer
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /bin/ls -ld /Library/Security/PolicyBanner.rtf* | /usr/bin/wc -l | tr -d ' '
+result: 
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  bannerText="You are accessing a <Customer> information system, which includes: 1) this computer, 2) this computer network, 3) all <Customer>-furnished computers connected to this network, and 4) all <Customer>-furnished devices and storage media attached to this network or to a computer on this network. You understand and consent to the following: you may access this information system for authorized use only; unauthorized use of the system is prohibited and subject to criminal and civil penalties; you have no reasonable expectation of privacy regarding any communication or data transiting or stored on this information system at any time and for any lawful <Customer> purpose, the <Customer> may monitor, intercept, audit, and search and seize any communication or data transiting or stored on this information system; and any communications or data transiting or stored on this information system may be disclosed or used for any lawful <Customer> purpose. This information system may contain Controlled Unclassified Information (CUI) that is subject to safeguarding or dissemination controls in accordance with law, regulation, or <Customer>-wide policy. Accessing and using this system indicates your understanding of this warning."
+  /bin/mkdir /Library/Security/PolicyBanner.rtf
+  /usr/bin/textutil -convert rtf -output /Library/Security/PolicyBanner.rtf/TXT.rtf -stdin <<EOF              
+  $bannerText
+  EOF
+  ----
+references:
+  cce:
+    - CCE-85355-6
+  cci: 
+    - CCI-000048
+    - CCI-000050
+    - CCI-001384
+    - CCI-001385
+    - CCI-001386
+    - CCI-001387
+    - CCI-001388
+  800-53r4: 
+    - AC-8
+  srg: 
+    - SRG-OS-000023-GPOS-00006
+    - SRG-OS-000024-GPOS-00007
+    - SRG-OS-000228-GPOS-00088
+  disa_stig: 
+    - APPL-11-000025
+  800-171r2:
+    - 3.1.9
+  custom:
+    CIS:
+    - 5.14 Create a Login window banner (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2 
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

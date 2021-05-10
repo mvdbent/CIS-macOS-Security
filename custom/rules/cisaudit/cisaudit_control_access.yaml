@@ -1,0 +1,75 @@
+id: cisaudit_control_access
+title: "Control access to audit records (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  The audit system on macOS writes important operational and security information that can be both useful for an attacker and a place for an attacker to attempt to obfuscate unwanted changes that were recorded. As part of defense-in-depth the /etc/security/audit_control configuration and the files in /var/audit should be owned only by root with group wheel with read-only rights and no other access allowed. macOS ACLs should not be used for these files.
+
+  [discrete]
+  ==== Rationale:
+  Audit records should never be changed except by the system daemon posting events. Records may be viewed or extracts manipulated but the authoritative files should be protected from unauthorized changes.
+  
+  [IMPORTANT]
+  ====
+  This control is only checking the default configuration to ensure that unwanted access to audit records is not available.
+  ====
+
+  [discrete]
+  ==== Audit:
+  Run the following commands to check file access rights.
+  [source,bash]
+  ----
+  $ /usr/bin/sudo ls -le /etc/security/audit_control
+  ----
+  The output should include the owner is root and the group is wheel or root and should not be readable or writable by Other. Ex: -r--r----- not -r--r--r-- or -r--r---w-
+  [source,bash]
+  ----
+  $ /usr/bin/sudo ls -le /etc/security/audit_control
+  ----
+  The output should include the owner is root and the group is wheel or root and all entries should not be readable or writable by Other (excluding the final current line). Ex: -r--r--- -- not -r--r--r-- or -r--r---w-
+
+  example
+  [source,bash]
+  ----
+  $ /usr/bin/sudo ls -le /etc/security/audit_control
+  $ /usr/bin/sudo ls -le /etc/security/audit_control
+  -r-------- 1 root wheel 369 27 Jul 15:56 /etc/security/audit_control
+  $ /usr/bin/sudo ls -le /var/audit/
+  -r--r----- 1 root wheel 1328341 10 Aug 09:08 20200810120444.crash_recovery
+  -r--r----- 1 root wheel 2718979 10 Aug 09:16 20200810131220.20200810131641
+  -r--r----- 1 root wheel 2102184 10 Aug 09:16 20200810131641.20200810131658
+  -r--r----- 1 root wheel 2103140 10 Aug 09:18 20200810131658.20200810131810
+  -r--r----- 1 root wheel 2097751 10 Aug 10:40 20200810131810.20200810144036
+  -r--r----- 1 root wheel 1481487 10 Aug 11:39 20200810144036.not_terminated
+  lrwxr-xr-x 1 root wheel      40 10 Aug 10:40 current -> /var/audit/20200810144036.not_terminated
+  ----
+check: |
+  /usr/bin/find /var/audit | awk '{s+=$3} END {print s}'
+result:
+  integer: 0
+fix: |
+  Run the following to commands to set the audit records to the root user and wheel group
+  [source,bash]
+  ----
+  /usr/sbin/chown -R root:wheel /etc/security/audit_control
+  /bin/chmod -R -o-rw /etc/security/audit_control
+  /usr/sbin/chown -R root:wheel /var/audit/
+  /bin/chmod -R -o-rw /var/audit/
+  ----
+  Note: It is recommended to do a through verification process on why the audit logs have been changed before following the remediation steps. If the system has different access controls on the audit logs, and the changes cannot be traced, a new install may be prudent. Check for signs of file tampering as well as unapproved OS changes.
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 3.5 Control access to audit records (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

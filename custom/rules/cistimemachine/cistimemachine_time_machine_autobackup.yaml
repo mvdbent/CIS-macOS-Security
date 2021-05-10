@@ -1,0 +1,57 @@
+id: cistimemachine_time_machine_autobackup
+title: "Time Machine Auto-Backup"
+discussion: |
+  [discrete]
+  ==== Description:
+  Backup solutions are only effective if the backups run on a regular basis. The time to check for backups is before the hard drive fails or the computer goes missing. In order to simplify the user experience so that backups are more likely to occur Time Machine should be on and set to Back Up Automatically whenever the target volume is available.
+  Operational staff should ensure that backups complete on a regular basis and the backups are tested to ensure that file restoration from backup is possible when needed.
+  Backup dates are available even when the target volume is not available in the Time Machine plist.
+
+  [source,bash]
+  ----
+  SnapshotDates = (
+  "2012-08-20 12:10:22 +0000",
+  "2013-02-03 23:43:22 +0000",
+  "2014-02-19 21:37:21 +0000",
+  "2015-02-22 13:07:25 +0000",
+  "2016-08-20 14:07:14 +0000"
+  ----
+
+  When the backup volume is connected to the computer more extensive information is available through tmutil. See man tmutil 
+
+  [discrete]
+  ==== Rationale:
+  Backups should automatically run whenever the backup drive is available
+
+  [IMPORTANT]
+  ====
+  The backup will run periodically in the background and could have user impact while running.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/defaults read /Library/Preferences/com.apple.TimeMachine.plist AutoBackup
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/defaults write /Library/Preferences/com.apple.TimeMachine.plist AutoBackup 1
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.7.1 Time Machine Auto-Backup (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

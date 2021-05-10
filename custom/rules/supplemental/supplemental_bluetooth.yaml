@@ -1,0 +1,21 @@
+id: supplemental_bluetooth
+title: "Bluetooth"
+discussion: |
+  Bluetooth is a short-range, low-power wireless technology commonly integrated into portable computing and communication devices and peripherals. Bluetooth is best used in a secure environment where unauthorized users have no physical access near the Mac. If Bluetooth is used, it should be secured properly (see below).
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 2.1 Bluetooth
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+mobileconfig: false
+mobileconfig_info:

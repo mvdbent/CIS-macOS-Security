@@ -1,0 +1,49 @@
+id: cistimemachine_wake_for_network
+title: "Disable Wake for network access (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  This feature allows the computer to take action when the user is not present and the computer is in energy saving mode. These tools require FileVault to remain unlocked and fully rejoin known networks. This macOS feature is meant to allow the computer to resume activity as needed regardless of physical security controls.
+  
+  This feature allows other users to be able to access your computer’s shared resources, such as shared printers or iTunes playlists, even when your computer is in sleep mode. In a closed network when only authorized devices could wake a computer it could be valuable to wake computers in order to do management push activity. Where mobile workstations and agents exist the device will more likely check in to receive updates when already awake. Mobile devices should not be listening for signals on unmanaged network where untrusted devices could send wake signals.
+  
+  [discrete]
+  ==== Rationale:
+  Disabling this feature mitigates the risk of an attacker remotely waking the system and gaining access.
+  
+  [IMPORTANT]
+  ==== 
+  Management programs like Apple Remote Desktop Administrator use wake-on-LAN to connect with computers. If turned off, such management programs will not be able to wake a computer over the LAN. If the wake-on-LAN feature is needed, do not turn off this feature.
+  
+  The control to prevent computer sleep has been retired for this version of the Benchmark. Forcing the computer to stay on and use energy in case a management push is needed is contrary to most current management processes. Only keep computers unslept if after hours pushes are required on closed LANs.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/pmset -g custom | /usr/bin/awk '/womp/ { sum+=$2 } END {print sum}'
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/pmset -a womp 0
+  ----
+references:
+  cce:
+    - CCE-85439-8
+  800-53r4:
+    - CM-7   
+  800-171r2:
+    - 3.4.6
+  custom:
+    CIS:
+    - 2.8 Disable Wake for network access (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

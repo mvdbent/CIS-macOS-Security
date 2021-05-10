@@ -1,0 +1,59 @@
+id: cissecurity_enable_filevault
+title: "Enable FileVault"
+discussion: |
+  [discrete]
+  ==== Description:
+  FileVault secures a system's data by automatically encrypting its boot volume and requiring a password or recovery key to access it.
+  Filevault may also be enabled using command line using the fdesetup command. To use this functionality, consult the Der Flounder blog for more details:
+  
+  https://derflounder.wordpress.com/2015/02/02/managing-yosemites-filevault-2-with-fdesetup/ 
+  https://derflounder.wordpress.com/2019/01/15/unlock-or-decrypt-your-filevault-encrypted-boot-drive-from-the-command-line-on-macos-mojave/
+
+  [discrete]
+  ==== Rationale:
+  Encrypting sensitive data minimizes the likelihood of unauthorized users gaining access to it.
+  
+  [IMPORTANT]
+  ====
+  Mounting a FileVaulted volume from an alternate boot source will require a valid password to decrypt it.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/fdesetup status | /usr/bin/grep -c "FileVault is On."
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85425-7
+  cci: 
+    - CCI-001199
+    - CCI-002475
+    - CCI-002476
+  800-53r4: 
+    - SC-28
+    - SC-28(1)
+  srg: 
+    - SRG-OS-000185-GPOS-00079
+    - SRG-OS-000404-GPOS-00183
+    - SRG-OS-000405-GPOS-00184
+  disa_stig: 
+    - APPL-11-005020
+  800-171r2:
+    - 3.13.16
+  custom:
+    CIS:
+    - 2.5.1.1 Enable FileVault (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.MCX.FileVault2:
+    Enable: true

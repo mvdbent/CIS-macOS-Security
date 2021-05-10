@@ -1,0 +1,77 @@
+id: cispwmanagement_hibernate_enabled
+title: "Ensure system is set to hibernate (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  In order to use a computer with Full Disk Encryption (FDE) macOS must keep encryption keys in memory to allow the use of the disk that has been FileVault protected. The storage volume has been unlocked and acts as if it was not encrypted. When the system is not in use the volume is protected through encryption. When the system is sleeping and available to quickly resume the encryption keys remain in memory.
+  
+  If an unauthorized party has possession of the computer and the computer is only slept there are known attack vectors that can be attempted against the RAM that has the encryption keys or the running operating system that is protected by a login screen. Network attacks if network interfaces are on as well as USB or other open device ports are possible. Most of these attacks require knowledge of unpatched vulnerabilities or a high level of sophistication if all the other controls function as intended.
+  
+  There is little impact on hibernating the system rather than sleeping after an appropriate time period to remediate the risk of OS level attacks. Hibernation writes the keys to desk and requires FileVault to be unlocked prior to the OS being available. In the case of unauthorized personnel with access to the computer encryption would have to be broken prior to attacking the operating system in order to recover data from the system.
+  
+  https://www.helpnetsecurity.com/2018/08/20/laptop-sleep-security/
+  
+  Mac systems should be set to hibernate after sleeping for a risk acceptable time period. The default value for "standbydelay" is three hours (10800 seconds). This value is likely appropriate for most Desktops. If Mac desktops are deployed in unmonitored less physically secure areas with confidential data this value might be adjusted. The desktop or would have to retain power so that the running OS or physical RAM could be attacked however.
+
+  MacBooks should be set so that the standbydelay is 15 minutes (900 seconds) or less. This setting should allow laptop users in most cases to stay within physically secured areas while going to a conference room, auditorium or other internal location without having to unlock the encryption. When the user goes home at night the laptop will auto-hibernate after 15 minutes and require the FileVault password to unlock prior to logging back into system when it resumes.
+
+  MacBooks should also be set to a hibernate mode that removes power from the RAM. This will stop the possibility of cold boot attacks on the system.
+
+  [discrete]
+  ==== Rationale:
+  To mitigate the risk of data loss the system should power down and lock the encrypted drive after a specified time. Laptops should hibernate 15 minutes or less after sleeping
+ 
+  [IMPORTANT]
+  ====
+  The laptop will take additional time to resume normal operation then if only sleeping rather than hibernating
+  ====
+
+  [discrete]
+  ==== Audit:
+  Run the following command to verify the hibernation settings and that FileVault keys are destroyed on standby:
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/sbin/system_profiler SPHardwareDataType | /usr/bin/grep -e MacBook
+  ----
+  If output will includes Model Name: MacBook, Model Name: MacBook Air, Model Name: MacBook Pro run the following:
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/bin/pmset -g | /usr/bin/grep -e standby
+  ----
+  The output should include a standbydelaylow value ≤ 600, a standbydelayhigh value ≤ 600, and a highstandbythreshold value ≥ 90.
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/bin/pmset -g | /usr/bin/grep DestroyFVKeyOnStandby
+
+  DestroyFVKeyOnStandby 1
+  
+  $ /usr/bin/sudo /usr/bin/pmset -g | /usr/bin/grep hibernatemode
+  
+  hibernatemode 25
+  ----
+check: |
+  /usr/bin/pmset -g | /usr/bin/grep -c "destroyfvkeyonstandby"
+result:
+  boolean: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/sudo /usr/bin/pmset -a standbydelayhigh 600 && /usr/bin/sudo /usr/bin/pmset -a standbydelaylow 600 && /usr/bin/sudo /usr/bin/pmset -a highstandbythreshold 90 && /usr/bin/sudo /usr/bin/pmset -a destroyfvkeyonstandby 1
+  ----
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.10 Ensure system is set to hibernate (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

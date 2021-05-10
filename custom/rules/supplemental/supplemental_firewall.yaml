@@ -1,0 +1,31 @@
+id: supplemental_firewall
+title: "Firewall"
+discussion: |
+  macOS has a built-in firewall that has two main configuration aspects. Both the Application Layer Firewall (ALF) and the Packet Filter Firewall (PF) can be used to secure running ports and services on a Mac. The Application Firewall is the one accessible in System Preferences under security, the PF firewall contains many more capabilities than ALF but also requires a greater understanding of firewall recipes and rule configurations. For standard use cases on a Mac use of the PF firewall is not necessary. macOS may expose server services that are reachable remotely but that is not the primary use case or design. If custom use cases are required the PF firewall can provide additional security. Macs that are used a mobile desktops do not need to use the PF firewall capabilities unless permanently open ports need to be protected with more granular IP access controls.
+
+  Additional information
+
+  https://www.muo.com/tag/mac-really-need-firewall/
+  
+  https://blog.neilsabol.site/post/quickly-easily-adding-pf-packet-filter-firewall-rules-macos-osx/
+  
+  http://marckerr.com/a-simple-guild-to-the-mac-pf-firewall/ 
+  
+  https://blog.scottlowe.org/2013/05/15/using-pf-on-os-x-mountain-lion/
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 2.5.2 Firewall
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+mobileconfig: false
+mobileconfig_info:

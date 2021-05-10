@@ -1,0 +1,90 @@
+id: cisaudit_flags
+title: "Configure Security Auditing Flags per local organizational requirements (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Auditing is the capture and maintenance of information about security-related events. Auditable events often depend on differing organizational requirements.
+
+  [discrete]
+  ==== Rationale:
+  Maintaining an audit trail of system activity logs can help identify configuration errors, troubleshoot service disruptions, and analyze compromises or attacks that have occurred, have begun, or are about to begin. Audit logs are necessary to provide a trail of evidence in case the system or network is compromised.
+
+  Depending on the governing authority, organizations can have vastly different auditing requirements. In this control we have selected a minimal set of audit flags that should be a part of any organizational requirement. The flags selected below may not adequately meet organizational requirement for users of this benchmark. The auditing checks for the flags proposed here will not impact additional flags that are selected.
+
+  [discrete]
+  ==== Audit:
+  Historical audit flags are listed below as preliminary guidance.
+  Run the following command to verify the Security Auditing Flags that are enabled
+
+  The output should include the following flags:
+
+  • fm - audit successful/failed file attribute modification events
+  • ad - audit successful/failed administrative events
+  • ex - audit failed program execution
+  • aa - audit all authorization and authentication events
+  • fr - audit all failed read actions where enforcement stops a read of a file
+  • lo - audit successful/failed login/logout events
+  • fw - audit all failed write actions where enforcement stopped a file write
+
+  The -all flag will capture all failed events across all audit classes and can use this to supersede the individual flags for failed events
+  [NOTE]
+  ====
+  Excluding potentially noisy audit events may be ideal, depending on your use-case.
+  ====
+check: |
+  /usr/bin/grep -Ec "^flags.*ad" /etc/security/audit_control
+result:
+  integer: 1
+fix: |
+  Perform the following to set the require Security Auditing Flags:
+  Edit the /etc/security/audit_control file and add fm, ad, ex, aa, fr, lo, and fw flags or add -all to flags.
+  [source,bash]
+  ----
+  /usr/bin/sed -i.bak '/^flags/ s/$/,ad/' /etc/security/audit_control; /usr/sbin/audit -s
+  ----
+references:
+  cce:
+    - CCE-85262-4
+  cci:
+    - CCI-000018
+    - CCI-000172
+    - CCI-001403
+    - CCI-001404
+    - CCI-001405
+    - CCI-002234
+    - CCI-002884
+  800-53r4:
+    - AU-2
+    - AC-2(4)
+    - AC-6(9)
+    - AU-12
+    - MA-4(1)
+  srg:
+    - SRG-OS-000004-GPOS-00004
+    - SRG-OS-000239-GPOS-00089
+    - SRG-OS-000240-GPOS-00090
+    - SRG-OS-000241-GPOS-00091
+    - SRG-OS-000327-GPOS-00127
+    - SRG-OS-000392-GPOS-00172
+    - SRG-OS-000471-GPOS-00215
+    - SRG-OS-000471-GPOS-00216
+    - SRG-OS-000476-GPOS-00221
+    - SRG-OS-000477-GPOS-00222
+  disa_stig:
+    - APPL-11-001001
+  800-171r2:
+    - 3.1.7
+    - 3.3.1
+    - 3.3.2
+  custom:
+    CIS:
+    - 3.2 Configure Security Auditing Flags per local organizational requirements (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

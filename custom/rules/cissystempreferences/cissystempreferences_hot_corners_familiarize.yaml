@@ -1,0 +1,38 @@
+id: cissystempreferences_hot_corners_familiarize
+title: "Familiarize users with screen lock tools or corner to Start Screen Saver"
+discussion: |
+  [discrete]
+  ==== Description:
+  In 10.13 Apple added a "Lock Screen" option to the Apple Menu. Prior to this the best quick lock options were to use either a lock screen option with the screen saver or the lock screen option from Keychain Access if status was made available in the menu bar. With 10.13 the menu bar option is no longer available. The intent of this control is to resemble control-alt-delete on Windows Systems as a means of quickly locking the screen. If the user of the system is stepping away from the computer the best practice is to lock the screen and setting a hot corner is an appropriate method.
+  
+  [discrete]
+  ==== Rationale:Ensuring the user has a quick method to lock their screen may reduce the opportunity for individuals in close physical proximity of the device to see screen contents.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -Ec '"wvous-bl-corner" = 0|"wvous-br-corner" = 0|"wvous-tl-corner" = 0|"wvous-tr-corner" = 0'
+result:
+  integer: 4
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.3.3 Familiarize users with screen lock tools or corner to Start Screen Saver (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.ManagedClient.preferences:
+    com.apple.dock:
+      wvous-bl-corner: 5

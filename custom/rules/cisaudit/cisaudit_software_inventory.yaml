@@ -1,0 +1,51 @@
+id: cisaudit_software_inventory
+title: "Software Inventory Considerations (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  With the introduction of Mac OS X 10.6.6, Apple added a new application, App Store, which resides in the Applications directory. This application allows a user with admin privileges and an Apple ID to browse Apple's online App Store, purchase (including no cost purchases), and install new applications, bypassing Enterprise software inventory controls. Any admin user can install software in the /Applications directory whether from internet downloads, thumb drives, optical media, cloud storage or even binaries through email. Even standard users can run executables downloaded to their home folder by default. The source of the software is not nearly as important as a consistent audit of all installed software for patch compliance and appropriateness.
+
+  A single user desktop where the user, administrator and the person approving software are all the same person probably does not need to audit software inventory to this extent. It is helpful in the case of stability problems or malware however.
+
+  Scan systems on a monthly basis and determine the number of unauthorized pieces of software that are installed. Verify that if an unauthorized piece of software is found one month, it is removed from the system the next.
+
+  Export System Information through the built-in System Information Application or other third-party tools on an organizationally defined timetable.
+
+  [discrete]
+  ==== Rationale:
+  Part of comprehensive IT security involves device management and ensuring that all software is authorized and patched. Checking for macOS updates and app updates are relatively simple for the end user and can even be updated with minimal privileges from trusted sources if enabled. Remote monitoring of the patch status for software maintained through Apple is very well supported by management applications. Neither Apple capabilities nor third party patch management solutions will cover all mission necessary software for most organizations. Full visibility into software present on the system enables vulnerability and risk management.
+
+  PS don't forget about browser plugins/extensions for all installed software.
+
+  [discrete]
+  ==== Audit:
+  To find more detailed instructions on the use of the system_profiler command, run the following:
+  [source,bash]
+  ----
+  man /usr/sbin/system_profiler -usage
+  /usr/sbin/system_profiler -listDataTypes 
+  ----
+check: |
+  /usr/sbin/system_profiler SPApplicationsDataType | grep -c "Location"
+result:
+  integer: 259
+fix: |
+  Delete any unnecessary applications from the system
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+  custom:
+    CIS:
+    - 3.7 Software Inventory Considerations (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

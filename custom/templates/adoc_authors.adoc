@@ -1,0 +1,35 @@
+== Acknowledgements
+
+This benchmark exemplifies the great things a community of users, vendors, and subject matter experts can accomplish through consensus collaboration. The CIS community thanks the entire consensus team with special recognition to the following individuals who contributed greatly to the creation of this guide:
+
+**Author** +
+[width="100%",cols="1,3"]
+|===
+|Ron Colvin| 
+|===
+
+**Contributor** +
+[width="100%",cols="1,3"]
+|===
+|William Harrison| 
+|Mark Andersen CISSP|GMOB
+|Ben Montour|
+|Sara Archacki|Center for Internet Security
+|Hao Shu|
+|Jeffrey Compton|
+|Jorge Escobar|
+|Edward Byrd|
+|===
+
+**Editor** +
+[width="100%",cols="1,3"]
+|===
+|Eric Pinnell|Center for Internet Security
+|Edward Byrd|Center for Internet Security
+|===
+
+**Implementation CIS Benchmark into macOS Security Compliance Project** +
+[width="100%",cols="1,3"]
+|===
+|Mischa van der Bent|Consulting Engineer Implementation EMEIA - Jamf
+|===

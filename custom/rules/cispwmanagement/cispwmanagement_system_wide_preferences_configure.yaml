@@ -1,0 +1,57 @@
+id: cispwmanagement_system_wide_preferences_configure
+title: "Require an administrator password to access system-wide preferences (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  System Preferences controls system and user settings on a macOS Computer. System Preferences allows the user to tailor their experience on the computer as well as allowing the System Administrator to configure global security settings. Some of the settings should only be altered by the person responsible for the computer.
+
+  [discrete]
+  ==== Rationale:
+  By requiring a password to unlock System-wide System Preferences the risk is mitigated of a user changing configurations that affect the entire system and requires an admin user to re-authenticate to make changes
+  
+  [IMPORTANT]
+  ====
+  If Automatic login is not disabled an unauthorized user could login without supplying a user password or credential.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/security authorizationdb read system.preferences 2> /dev/null |  /usr/bin/grep -A 1 "<key>shared</key>" | /usr/bin/grep -c "<false/>"
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/security authorizationdb read system.preferences > /tmp/system.preferences.plist
+  /usr/libexec/PlistBuddy -c "Set :shared false" /tmp/system.preferences.plist
+  /usr/bin/security authorizationdb write system.preferences < /tmp/system.preferences.plist
+  ----
+references:
+  cce:
+    - CCE-85389-5
+  800-53r4:
+    - AC-6
+    - AC-6(1)
+    - AC-6(2)
+  disa_stig:
+    - APPL-11-002069
+  srg:
+    - SRG-OS-000378-GPOS-00163
+  cci:
+    - CCI-001958
+  800-171r2:
+    - 3.1.5
+    - 3.1.6
+  custom:
+    CIS:
+    - 5.11 Require an administrator password to access system-wide preferences (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

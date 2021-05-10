@@ -1,0 +1,540 @@
+id: supplemental_checklist
+title: "Checklist"
+discussion: |
+  [%header,cols="16,1,1"]
+  |===
+  ^.^|Checklist
+  ^.^|Yes
+  ^.^|No
+
+  <.^|**Install Updates, Patches and Additional Security Software**
+  |
+  |
+
+  <.^|Verify all Apple-provided software is current (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Auto Update (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Download new updates when available (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable app update installs (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable system data files and security updates install (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable macOS update installs (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Computer Name Considerations. (Manual) 
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**System Preferences**
+  ^.^|
+  ^.^|
+
+  <.^|**Bluetooth**
+  ^.^|
+  ^.^|
+
+  <.^|Turn off Bluetooth, if no paired devices exist (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Show Bluetooth status in menu bar (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Date & Time**
+  ^.^|
+  ^.^|
+
+  <.^|Enable "Set time and date automatically" (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure time set is within appropriate limits (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Desktop & Screen Saver**
+  ^.^|
+  ^.^|
+
+  <.^|Set an inactivity interval of 20 minutes or less for the screen saver (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Secure screen saver corners (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Familiarize users with screen lock tools or corner to Start Screen Saver (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Sharing**
+  ^.^|
+  ^.^|
+
+  <.^|Disable Remote Apple Events (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Internet Sharing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Screen Sharing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Printer Sharing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Remote Login (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable DVD or CD Sharing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Bluetooth Sharing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable File Sharing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Remote Management (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Content Caching (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Media Sharing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Security & Privacy**
+  ^.^|
+  ^.^|
+
+  <.^|**Encryption**
+  ^.^|
+  ^.^|
+
+  <.^|Enable FileVault (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure all user storage APFS volumes are encrypted (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure all user storage CoreStorage volumes are encrypted (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Firewall**
+  ^.^|
+  ^.^|
+
+  <.^|Enable Gatekeeper (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Firewall (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Firewall Stealth Mode (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Review Application Firewall Rules (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Location Services (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Monitor Location Services Access (Manual)
+  ^.^|☐
+  ^.^|☐
+  
+  <.^|Disable sending diagnostic and usage data to Apple (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Limit Ad tracking and personalized Ads (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Camera Privacy and Confidentiality Concerns (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**iCloud**
+  ^.^|
+  ^.^|
+
+  <.^|iCloud configuration (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|iCloud keychain (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|iCloud Drive (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|iCloud Drive Document and Desktop sync (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Time Machine**
+  ^.^|
+  ^.^|
+
+  <.^|Time Machine Auto-Backup (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Time Machine Volumes Are Encrypted (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Wake for network access (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Power Nap (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Secure Keyboard Entry in terminal.app (Automated)
+  ^.^|☐
+  ^.^|☐
+  
+  <.^|Ensure EFI version is valid and being regularly checked (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Automatic Actions for Optical Media (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Review Siri Settings (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Logging and Auditing**
+  ^.^|
+  ^.^|
+
+  <.^|Enable security auditing (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Configure Security Auditing Flags per local organizational requirements (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Retain install.log for 365 or more days with no maximum size (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure security auditing retention (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Control access to audit records (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure Firewall is configured to log (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Software Inventory Considerations (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Network Configurations**
+  ^.^|
+  ^.^|
+
+  <.^|Disable Bonjour advertising service (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable "Show Wi-Fi status in menu bar" (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Create network specific locations (Manual) 
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure http server is not running (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure nfs server is not running. (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Review Wi-Fi Settings (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**System Access, Authentication and Authorization**
+  ^.^|
+  ^.^|
+
+  <.^|**File System Permissions and Access Controls**
+  ^.^|
+  ^.^|
+
+  <.^|Secure Home Folders (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Check System Wide Applications for appropriate permissions (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Check System folder for world writable files (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Check Library folder for world writable files (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Password Management**
+  ^.^|
+  ^.^|
+
+  <.^|Configure account lockout threshold (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Set a minimum password length (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Complex passwords must contain an Alphabetic Character (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Complex passwords must contain a Numeric Character (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Complex passwords must contain a Special Character (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Complex passwords must uppercase and lowercase letters (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Password Age (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Password History (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Reduce the sudo timeout period (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Automatically lock the login keychain for inactivity (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Use a separate timestamp for each user/tty combo (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure login keychain is locked when the computer sleeps (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Do not enable the "root" account (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable automatic login (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Require a password to wake the computer from sleep or screen saver (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure system is set to hibernate (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Require an administrator password to access system-wide preferences (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Ensure an administrator account cannot login to another user's active and locked session (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Create a custom message for the Login Screen (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Create a Login window banner (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Do not enter a password-related hint (Automated) 
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable Fast User Switching (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Secure individual keychains and items (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|System Integrity Protection status (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Sealed System Volume (SSV) (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Enable Library Validation (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**User Accounts and Environment Accounts Preferences Action Items**
+  ^.^|
+  ^.^|
+
+  <.^|**Accounts Preferences Action Items**
+  ^.^|
+  ^.^|
+
+  <.^|Display login window as name and password (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable "Show password hints" (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable guest account login (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable "Allow guests to connect to shared folders" (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Remove Guest home folder (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Turn on filename extensions (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Disable the automatic run of safe files in Safari (Automated)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|**Additional Considerations**
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Extensible Firmware Interface (EFI) password (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|FileVault and Local Account Password Reset using AppleID (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Repairing permissions is no longer needed (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|App Store Password Settings (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Apple Watch features with macOS (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|System information backup to remote computers (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Unified logging (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|AirDrop security considerations (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Touch ID (Manual)
+  ^.^|☐
+  ^.^|☐
+
+  <.^|Sidecar (Manual)
+  ^.^|☐
+  ^.^|☐
+  
+  <.^|Screen Time (Manual) 
+  ^.^|☐
+  ^.^|☐
+
+  |===
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+mobileconfig: false
+mobileconfig_info:

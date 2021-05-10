@@ -1,0 +1,55 @@
+id: cissharing_rae_disable
+title: "Disable Remote Apple Events"
+discussion: |
+  [discrete]
+  ==== Description:
+  Apple Events is a technology that allows one program to communicate with other programs. Remote Apple Events allows a program on one computer to communicate with a program on a different computer.
+  
+  [discrete]
+  ==== Rationale:
+  Disabling Remote Apple Events mitigates the risk of an unauthorized program gaining access to the system.
+  
+  [IMPORTANT]
+  ====
+  With remote Apple events turned on, an AppleScript program running on another Mac can interact with the local computer.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /bin/launchctl print-disabled system | /usr/bin/grep -c '"com.apple.AEServer" => true'
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/sbin/systemsetup -setremoteappleevents off
+  /bin/launchctl disable system/com.apple.AEServer
+  ----
+  NOTE: Systemsetup with -setremoteappleevents flag will fail unless you grant Full Disk Access to systemsetup or it's parent process. Requires UAMDM.
+references:
+  cce:
+    - CCE-85440-6
+  cci: 
+    - CCI-000382
+  800-53r4: 
+    - AC-3
+  srg: 
+    - SRG-OS-000096-GPOS-00050
+  disa_stig: 
+    - APPL-11-002022
+  800-171r2:
+    - 3.1.1
+    - 3.1.2
+  custom:
+    CIS:
+    - 2.4.1 Disable Remote Apple Events (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: false
+mobileconfig_info:

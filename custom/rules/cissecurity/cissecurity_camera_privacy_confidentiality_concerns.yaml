@@ -1,0 +1,46 @@
+id: cissecurity_camera_privacy_confidentiality_concerns
+title: "Camera Privacy and Confidentiality Concerns"
+discussion: |
+  [discrete]
+  ==== Description:
+  If the computer is present in an area where there are privacy concerns or sensitive images or actions are taking place the camera should be covered at those times. A permanent cover or alteration may be required when the computer is always located in a confidential area.
+
+  Malware is continuously discovered that circumvents the privacy controls of the built-in camera. No computer has perfect security and it seems likely that even if all the drivers are disabled or removed that working drivers can be re-introduced by a determined attacker.
+
+  [discrete]
+  ==== Rationale:
+  At this point video chatting and other uses of the built-in camera are standard uses for a computer. In cases where the camera is not allowed to be used at all or when the computer is located in private areas additional precautions are warranted. OS components used for the built-in video camera can also be used for other connected cameras, whether USB or bluetooth. Removed OS components that enable a camera may be re-installed or re- enabled.
+
+  The General rule should be that if the camera can capture images that could cause embarrassment or an adverse impact the camera should be covered until it is appropriate to use.
+
+  [discrete]
+  ==== Audit:
+  Perform the following to verify if any camera is enabled/connected:
+
+  1. Open /Applications/Utilities/System Information
+  2. Select Camera
+  3. Verify that any camera is set to your organization's preference
+check: |
+  N/A
+result:
+  string: N/A
+fix: |
+  There is no supported method from Apple to enable/disable the built-in FaceTime camera. Remove any external cameras based on your organization's policies.
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  800-171r2:
+    - N/A
+  custom:
+    CIS:
+    - 2.5.8 Camera Privacy and Confidentiality Concerns (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

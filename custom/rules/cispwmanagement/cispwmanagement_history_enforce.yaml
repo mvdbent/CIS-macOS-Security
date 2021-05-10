@@ -1,0 +1,54 @@
+id: cispwmanagement_history_enforce
+title: "Password History (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Over time passwords can be captured by third parties through mistakes, phishing attacks, third party breaches or merely brute force attacks. To reduce the risk of exposure and to decrease the incentives of password reuse (passwords that are not forced to be changed periodically generally are not ever changed) users must reset passwords periodically. This control ensures that previous passwords are not reused immediately by keeping a history of previous passwords hashes. Ensure that password history checks are part of the password policy on the computer. This control checks whether a new password is different than the previous 15. The latest NIST guidance based on exploit research referenced in this section details how one of the greatest risks is password exposure rather than password cracking. Passwords should be changed to a new unique value whenever a password might have been exposed to anyone other than the account holder. Attackers have maintained persistent control based on predictable password change patterns and substantially different patterns should be used in case of a leak.
+
+  [discrete]
+  ==== Rationale:
+  Old passwords should not be reused
+
+  [IMPORTANT]
+  ====
+  Required password changes will lead to some locked computers requiring admin assistance
+  ====
+
+  [discrete]
+  ==== Audit:
+check: | 
+  /usr/bin/profiles -P -o stdout | /usr/bin/awk '/pinHistory/{sub(/;.*/,"");print $3}'
+result:
+  integer: 15
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85407-5
+  cci: 
+  - CCI-000200
+  800-53r4: 
+    - IA-5(1)
+  srg: 
+    - SRG-OS-000077-GPOS-00045
+  disa_stig: 
+    - APPL-11-003009
+  800-171r2:
+    - 3.5.7
+    - 3.5.8
+    - 3.5.9
+    - 3.5.10
+  custom:
+    CIS:
+    - 5.2.8 Password History (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.mobiledevice.passwordpolicy:
+    pinHistory: 15

@@ -1,0 +1,56 @@
+id: cisnetwork_wifi_settings
+title: "Review Wi-Fi Settings (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Some organizations have comprehensive rules that cover the use of wireless technologies in order to implement operational security. There are specific policies governing the use of both Bluetooth and Wi-Fi (802.11) that often include disabling the wireless capability in either software or hardware or both.
+
+  Wireless access is part of the feature set required for mobile computers and is considered essential for most users.
+  
+  [discrete]
+  ==== Rationale:
+  The general use case for macOS is to use wireless connectivity. In current hardware offering very few computers made by Apple provide a built-in wired network capability. While it is possible to get an ethernet adapter for wired connectivity it is not the default. The almost exclusive Apple use case is to support mobile connectivity for users of their devices through wireless connections. For use cases that wireless connectivity is not allowed an Apple model with built-in ethernet is the best option. Wireless can be turned off in those situations in the network system preference pane.
+
+  [discrete]
+  ==== Audit:
+  Run the following commands to verify the Airport settings:
+  [source,bash]
+  ----
+  /usr/bin/sudo -u /usr/sbin/networksetup -listallhardwareports | grep -A 1 'Hardware Port: Wi-Fi'
+  ----
+  The output will include Device and the network device number:
+  Hardware Port: Wi-Fi
+  Device: en1
+  [source,bash]
+  ----
+  /usr/bin/sudo /usr/sbin/networksetup -getairportpower en1
+  ----
+  The output will state whether wireless is enabled or disabled
+  Wi-Fi Power (en1): Off
+check: |
+  /usr/bin/sudo /usr/sbin/networksetup -listallhardwareports | grep -c 'Hardware Port: Wi-Fi'
+result:
+  boolean: 1
+fix: |
+  Run the following command to enabled or disabled wireless.
+  Set en0 to the proper wifi Device and change the on or off option.
+  [source,bash]
+  ----
+  /usr/sbin/networksetup -setairportpower en0 on
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 4.6 Review Wi-Fi Settings (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

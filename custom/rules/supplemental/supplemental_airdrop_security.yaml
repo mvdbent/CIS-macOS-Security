@@ -1,0 +1,64 @@
+id: supplemental_airdrop_security
+title: "AirDrop security considerations (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  AirDrop is Apple's built-in on demand ad hoc file exchange system that is compatible with both macOS and iOS. It uses Bluetooth LE for discovery that limits connectivity to Mac or iOS users that are in close proximity. Depending on the setting it allows everyone or only Contacts to share files when they are nearby to each other.
+
+  In many ways this technology is far superior to the alternatives. The file transfer is done over a TLS encrypted session, does not require any open ports that are required for file sharing, does not leave file copies on email servers or within cloud storage, and allows for the service to be mitigated so that only people already trusted and added to contacts can interact with you.
+  
+  Even with all of these positives some environments may wish to disable AirDrop. Organizations where Bluetooth and Wireless are not used will disable AirDrop by blocking its necessary interfaces. Organizations that have disabled USB and other pluggable storage mechanisms and have blocked all unmanaged cloud and transfer solutions for DLP may want to disable AirDrop as well.
+
+  AirDrop should be used with Contacts only to limit attacks.
+
+  More info 
+  
+  https://www.imore.com/how-apple-keeps-your-airdrop-files-private-and-secure 
+  
+  https://en.wikipedia.org/wiki/AirDrop
+  
+  [discrete]
+  ==== Rationale:
+  AirDrop can allow malicious files to be downloaded from unknown sources.
+  
+  [IMPORTANT]
+  ====
+  Disabling AirDrop can limit the ability to move files quickly over the network without using file shares.
+  ====
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults read com.apple.NetworkBrowser DisableAirDrop
+result:
+  integer: 0
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults write com.apple.NetworkBrowser DisableAirDrop - bool true
+  ----
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 7.8 AirDrop security considerations (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

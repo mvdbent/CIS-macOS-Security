@@ -1,0 +1,50 @@
+id: cisaudit_firewall_log_enable
+title: "Ensure Firewall is configured to log (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  The socketfilter firewall is what is used when the firewall is turned on in the Security PreferencePane. In order to appropriately monitor what access is allowed and denied logging must be enabled.
+   
+  [discrete]
+  ==== Rationale:
+  In order to troubleshoot the successes and failures of a firewall, logging should be enabled.
+  
+  [IMPORTANT]
+  ====
+  Detailed logging may result in excessive storage.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/libexec/ApplicationFirewall/socketfilterfw --getloggingmode | /usr/bin/grep -c "Log mode is on"
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on
+  ----
+references:
+  cce:
+    - CCE-85313-5
+  800-53r4: 
+    - SC-7
+    - AU-12
+  800-171r2:
+    - 3.3.1
+    - 3.3.2
+    - 3.13.1
+    - 3.13.2
+    - 3.13.5
+  custom:
+    CIS:
+    - 3.6 Ensure Firewall is configured to log (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

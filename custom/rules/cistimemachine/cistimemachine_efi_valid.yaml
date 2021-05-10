@@ -1,0 +1,59 @@
+id: cistimemachine_efi_valid
+title: "Ensure EFI version is valid and being regularly checked (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  In order to mitigate firmware attacks Apple has created an automated Firmware check to ensure that the EFI version running is a known good version from Apple. There is also an automated process to check it every seven days.
+
+  [discrete]
+  ==== Rationale:
+  If the Firmware of a computer has been compromised the Operating System that the Firmware loads cannot be trusted either.
+
+  [discrete]
+  ==== Audit:
+  Verify that the computer does not have a
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/libexec/firmwarecheckers/eficheck/eficheck --integrity-check
+  ----
+  The output should include Primary allowlist version match found. No changes detected in primary hashes. as well as the model and version in this format MBP133.xxx.xxxx.xxx.xxxxxxxxx.
+  
+  An Apple T2 Security Chip will case this check to give the following output:
+  ReadBinaryFromKernel: No matching services found. Either this system is not supported by eficheck, or you need to re-load the kext IntegrityCheck: couldn't get EFI contents from kext
+  Run this command to verify that the machine does have an Apple T2 Security Chip:
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /usr/sbin/system_profiler SPiBridgeDataType | /usr/bin/grep "T2" 
+  
+  Model Name: Apple T2 Security Chip
+  ----
+  Either state is compliant.
+  Run this command to verify that the efi check system daemon is running (including machines with the T2 chip):
+  [source,bash]
+  ----
+  $ /usr/bin/sudo /bin/launchctl list | /usr/bin/grep com.apple.driver.eficheck 
+  
+  Result: -     0     com.apple.driver.eficheck
+  ----
+check: |
+  /usr/libexec/firmwarecheckers/eficheck/eficheck --integrity-check 
+result:
+  integer: 1
+fix: |
+  If EFI does not pass the integrity check you may send a report to Apple. Backing up files and clean installing a known good Operating System and Firmware is recommended.
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.11 Ensure EFI version is valid and being regularly checked (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

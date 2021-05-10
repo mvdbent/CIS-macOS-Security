@@ -1,0 +1,44 @@
+id: cispwmanagement_disable_fast_user_switching
+title: "Disable Fast User Switching (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Fast user switching allows a person to quickly log in to the computer with a different account. While only a minimal security risk, when a second user is logged in, that user might be able to see what processes the first user is using, or possibly gain other information about the first user. In a large directory environment where it is difficult to limit login access many valid users can login to other user's assigned computers.
+
+  [discrete]
+  ==== Rationale:
+  Fast user switching allows multiple users to run applications simultaneously at console. There can be information disclosed about processes running under a different user. Without a specific configuration to save data and log out users can have unsaved data running in a background session that is not obvious.
+  
+  [IMPORTANT]
+  ====
+  When support staff visits a user's computer console, they will not be able to log in to their own session if there is an active and locked session.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'MultipleSessionEnabled = false'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.16 Disable Fast User Switching (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: true
+mobileconfig_info:
+  .GlobalPreferences:
+    MultipleSessionEnabled: false
+    
+

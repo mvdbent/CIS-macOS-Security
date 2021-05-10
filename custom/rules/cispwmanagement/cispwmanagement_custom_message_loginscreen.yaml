@@ -1,0 +1,43 @@
+id: cispwmanagement_custom_message_loginscreen
+title: "Create a custom message for the Login Screen (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  An access warning informs the user that the system is reserved for authorized use only, and that the use of the system may be monitored.
+
+  [discrete]
+  ==== Rationale:
+  An access warning may reduce a casual attacker's tendency to target the system. Access warnings may also aid in the prosecution of an attacker by evincing the attacker's knowledge of the system's private status, acceptable use policy, and authorization requirements.
+  
+  [IMPORTANT]
+  ====
+  If users are not informed of their responsibilities, unapproved activities may occur. Users that are not approved for access may take the lack of a warning banner as implied consent to access.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: | 
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'LoginwindowText'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.13 Create a custom message for the Login Screen (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1  
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.loginwindow:
+    LoginwindowText: "Custom Message"

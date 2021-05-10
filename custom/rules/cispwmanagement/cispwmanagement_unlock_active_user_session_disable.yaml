@@ -1,0 +1,55 @@
+id: cispwmanagement_unlock_active_user_session_disable
+title: "Ensure an administrator account cannot login to another user's active and locked session (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  macOS has a privilege that can be granted to any user that will allow that user to unlock active user's sessions.
+
+  [discrete]
+  ==== Rationale:
+  Disabling the admins and/or user's ability to log into another user's active and locked session prevents unauthorized persons from viewing potentially sensitive and/or personal information.
+  
+  [IMPORTANT]
+  ====
+  While Fast user switching is a workaround for some lab environments especially where there is even less of an expectation of privacy this setting change may impact some maintenance workflows
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/security authorizationdb read system.login.screensaver 2>&1 | /usr/bin/grep -c 'use-login-window-ui'
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/security authorizationdb write system.login.screensaver "use-login-window-ui"
+  ----
+references:
+  cce:
+    - CCE-85395-2
+  cci:
+    - N/A
+  800-53r4:
+    - IA-2
+    - IA-2(5)
+  disa_stig:
+    - N/A
+  srg:
+    - N/A
+  cci:
+    - N/A
+  800-171r2:
+    - 3.5.1
+    - 3.5.2
+  custom:
+    CIS:
+    - 5.12 Ensure an administrator account cannot login to another user's active and locked session (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,64 @@
+id: cisaudit_install_log
+title: "Retain install.log for 365 or more days with no maximum size (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  macOS writes information pertaining to system-related events to the file /var/log/install.log and has a configurable retention policy for this file. The default logging setting limits the file size of the logs and the maximum size for all logs. The default allows for an errant application to fill the log files and does not enforce sufficient log retention. The Benchmark recommends a value based on standard use cases. The value should align with local requirements within the organization.
+  
+  The default value has an "all_max" file limitation, no reference to a minimum retention and a less precise rotation argument.
+
+  The all_max flag control will remove old log entries based only on the size of the log files. Log size can vary widely depending on how verbose installing applications are in their log entries. The decision here is to ensure that logs go back a year and depending on the applications a size restriction could compromise the ability to store a full year.
+
+  While this Benchmark is not scoring for a rotation flag the default rotation is sequential rather than using a timestamp. Auditors may prefer timestamps in order to simply review specific dates where event information is desired.
+
+  Please review the File Rotation section in the man page for more information. 
+  [source,bash]
+  ----
+  man asl.conf
+  ----
+  
+  • The maximum file size limitation string should be removed "all_max="
+  • An organization appropriate retention should be added "ttl="
+  • The rotation should be set with time stamps "rotate=utc" or "rotate=local"
+    
+  [discrete]
+  ==== Rationale:
+  Archiving and retaining install.log for at least a year is beneficial in the event of an incident as it will allow the user to view the various changes to the system along with the date and time they occurred.
+
+  [discrete]
+  ==== Audit:  
+check: |
+  /usr/bin/grep -i all_max= /etc/asl/com.apple.install 
+result:
+  integer: 0
+fix: |
+  Perform the following to ensure that install logs are retained for at least 365 days:
+  Edit the /etc/asl/com.apple.install file and add or modify the ttl value to 365 or greater on the file line. Also, remove the all_max= setting and value from the file line.
+  [source,bash]
+  ----
+  /bin/mv /etc/asl/com.apple.install /etc/asl/com.apple.install.old
+  /usr/bin/sed '$s/$/ ttl=365/' /etc/asl/com.apple.install.old > /etc/asl/com.apple.install
+  /bin/chmod 644 /etc/asl/com.apple.install
+  /usr/sbin/chown root:wheel /etc/asl/com.apple.install
+  ----
+references:
+  cce:
+    - CCE-85263-2  
+  800-53r4:
+    - AU-2
+    - AU-12
+    - CM-5(1)
+  800-171r2:
+    - 3.3.1
+    - 3.3.2
+  custom:
+    CIS:
+    - 3.3 Retain install.log for 365 or more days with no maximum size (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

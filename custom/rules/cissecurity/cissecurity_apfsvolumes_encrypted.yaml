@@ -1,0 +1,42 @@
+id: cissecurity_apfsvolumes_encrypted
+title: "Ensure all user storage APFS volumes are encrypted"
+discussion: |
+  [discrete]
+  ==== Description:
+  Apple developed a new file system that was first made available in 10.12 and then became the default in 10.13. The file system is optimized for Flash and Solid State storage and encryption. https://en.wikipedia.org/wiki/Apple_File_System macOS computers generally have several volumes created as part of APFS formatting including Preboot, Recovery and Virtual Memory (VM) as well as traditional user disks.
+
+  All APFS volumes that do not have specific roles that do not require encryption should be encrypted. "Role" disks include Preboot, Recovery and VM. User disks are labelled with "(No specific role)" by default.
+  
+  [discrete]
+  ==== Rationale:
+  In order to protect user data from loss or tampering volumes carrying data should be encrypted
+
+  [IMPORTANT]
+  ====
+  While FileVault protects the boot volume data may be copied to other attached storage and reduce the protection afforded by FileVault. Ensure all user volumes are encrypted to protect data.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/sbin/diskutil info / | awk '/FileVault/ {print $2}'
+result:
+  string: Yes
+fix: |
+  Ensure all user storage APFS Volumes are encrypted
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.5.1.2 Ensure all user storage APFS volumes are encrypted (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

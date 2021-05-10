@@ -1,0 +1,61 @@
+id: cispwmanagement_minimum_length_enforce
+title: "Set a minimum password length (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  A minimum password length is the fewest number of characters a password can contain to meet a system's requirements.
+
+  Ensure that a minimum of a 15 character password is part of the password policy on the computer.
+
+  Where the confidentiality of encrypted information in FileVault is more of a concern requiring a longer password or passphrase may be sufficient rather than imposing additional complexity requirements that may be self-defeating.
+
+  [discrete]
+  ==== Rationale:
+  Information systems that are not protected with strong password schemes including passwords of minimum length provide a greater opportunity for attackers to crack the password and gain access to the system.
+  
+  [IMPORTANT]
+  ====
+  Short passwords can be easily attacked.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'minLength = 15' 
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85409-1
+  cci: 
+    - CCI-000205
+  800-53r4: 
+    - IA-5
+    - IA-5(1)
+  srg: 
+    - SRG-OS-000078-GPOS-00046
+  disa_stig: 
+    - APPL-11-003010
+  800-171r2:
+    - 3.5.1
+    - 3.5.2
+    - 3.5.7
+    - 3.5.8
+    - 3.5.9
+    - 3.5.10
+  custom:
+    CIS:
+    - 5.2.2 Set a minimum password length (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.mobiledevice.passwordpolicy:
+    minLength: 15

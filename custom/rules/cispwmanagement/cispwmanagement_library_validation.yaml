@@ -1,0 +1,43 @@
+id: cispwmanagement_library_validation
+title: "Enable Library Validation (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Library Validation is a security feature introduced in macOS 10.10 Yosemite. Library Validation protects processes from loading arbitrary libraries, root from becoming more powerful (root may load arbitrary libraries into any process depending on SIP status). Security is strengthened, because some user processes can no longer be fooled to run additional code without root's explicit request, which may grant access to daemons that depend on Library Validation for secure validation of code identity.
+  
+  [discrete]
+  ==== Rationale:
+  Running without Library Validation on a production system runs the risk of the modification of system binaries or code injection of system processes that would otherwise be protected by Library Validation.
+
+  [IMPORTANT]
+  ====
+  System binaries and processes could load arbitrary libraries.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/defaults read /Library/Preferences/com.apple.security.librarayvalidation.plist DisableLibraryValidation
+result:
+  boolean: 0
+fix: |
+  [source,bash]
+  ----
+  /usr/bin/defaults write /Library/Preferences/com.apple.security.librarayvalidation.plist DisableLibraryValidation -bool false
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 5.20 Enable Library Validation (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

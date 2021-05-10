@@ -1,0 +1,38 @@
+id: cissharing_printer_disable
+title: "Disable Printer Sharing"
+discussion: |
+  [discrete]
+  ==== Description:
+  By enabling Printer sharing the computer is set up as a print server to accept print jobs from other computers. Dedicated print servers or direct IP printing should be used instead.
+  
+  [discrete]
+  ==== Rationale:
+  Disabling Printer Sharing mitigates the risk of attackers attempting to exploit the print server to gain access to the system.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/sbin/cupsctl | /usr/bin/grep -c "share_printers=0"
+result:
+  integer: 1
+fix: |
+  [source,bash]
+  ----
+  /usr/sbin/lpadmin -p 'shared-printer' -o printer-is-shared=false
+  ----
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.4.4 Disable Printer Sharing (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

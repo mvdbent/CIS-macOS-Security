@@ -1,0 +1,60 @@
+id: cissystempreferences_time_server_configure
+title: "Ensure time set is within appropriate limits"
+discussion: |
+  [discrete]
+  ==== Description: 
+  Correct date and time settings are required for authentication protocols, file creation, modification dates and log entries. Ensure that time on the computer is within acceptable limits. Truly accurate time is measured within milliseconds, for this audit a drift under four and a half minutes passes the control check. Since Kerberos is one of the important features of macOS integration into Directory systems the guidance here is to warn you before there could be an impact to operations. From the perspective of accurate time this check is not strict, it may be too great for your organization, adjust to a smaller offset value as needed.
+
+  [NOTE] 
+  ====
+  ntpdate has been deprecated with 10.14. sntp replaces that command.
+  ====
+  
+  [discrete]
+  ==== Rationale:
+  Kerberos may not operate correctly if the time on the Mac is off by more than 5 minutes. This in turn can affect Apple's single sign-on feature, Active Directory logons, and other features. Audit check is for more than 4 minutes and 30 seconds ahead or behind.
+  
+  [IMPORTANT]
+  ====
+  Accurate time is required for many computer functions.
+  ====
+
+  [discrete]
+  ==== Audit:
+  Example is time.apple.com, you can change this to the preferred timeServer.
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/awk -F "= " '/timeServer/{print $2}' | /usr/bin/tr -d ';' | /usr/bin/tr -d '"'
+result:
+  string: "time.apple.com"
+
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85448-9
+  cci: 
+    - CCI-001891
+    - CCI-002046
+  800-53r4: 
+    - AU-8(1)
+  srg: 
+    - SRG-OS-000355-GPOS-00143
+    - SRG-OS-000356-GPOS-00144
+  disa_stig: 
+    - APPL-11-000014
+  800-171r2:
+    - 3.3.7
+  custom:
+    CIS:
+    - 2.2.2 Ensure time set is within appropriate limits (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.MCX:
+    timeServer: "time.apple.com"

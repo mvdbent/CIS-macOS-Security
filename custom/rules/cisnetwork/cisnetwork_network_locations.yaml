@@ -1,0 +1,60 @@
+id: cisnetwork_network_locations
+title: 'Create network specific locations (Manual)'
+discussion: |
+  [discrete]
+  ==== Description:
+  The network location feature of the Mac is a very powerful tool to manage network security. By creating different network locations, a user can easily (and without administrative privileges) change the network settings on the Mac. By only using the network interfaces needed at any specific time, exposure to network attacks is limited.
+  
+  A little understanding of how the Network System Preferences pane works is required.
+  
+  [discrete]
+  ==== Rationale:
+  Network locations allow the computer to have specific configurations ready for network access when required. Locations can be used to manage which network interfaces are available for specialized network access
+
+  [IMPORTANT]
+  ====
+  Unneeded network interfaces increase the attack surface and could lead to a successful exploit.
+  ====
+
+  [discrete]
+  ==== Audit:
+  Perform the following to verify that all network locations meet your organization's requirements:
+  
+  1. Open System Preferences
+  2. Select Network
+  3. Select Location
+  4. Verify that each available network location and the associated network interfaces meet your organization's requirements
+check: |
+fix: |
+  Perform the following actions to create and edit multiple network locations as needed.
+  
+  1. Open System Preferences
+  2. Select Network
+  3. Select Location
+  4. Select Edit Locations from the Locations popup menu
+  5. Select any unneeded network locations
+  6. Click the minus button for any unneeded locations
+  7. Select Done
+  8. Select any remaining network locations
+  9. Select any unneeded network interfaces
+  10. Select the minus button to remove them
+
+  Note: Delete the Automatic location for any device that does not use multiple network services set for DHCP or dynamic addressing. If network services like FireWire, VPN, AirPort or Ethernet are not used by a specific device class those services should be deleted.
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  800-171r2:
+    - N/A
+  custom:
+    CIS:
+    - 4.3 Create network specific locations (Manual)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+mobileconfig: false
+mobileconfig_info:

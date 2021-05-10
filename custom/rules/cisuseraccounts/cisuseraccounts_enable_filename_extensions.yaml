@@ -1,0 +1,44 @@
+id: useraccounts_enable_filename_extensions
+title: "Turn on filename extensions (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  A filename extension is a suffix added to a base filename that indicates the base filename's file format.
+
+  [discrete]
+  ==== Rationale:
+  Visible filename extensions allow the user to identify the file type and the application it is associated with which leads to quick identification of misrepresented malicious files.
+  
+  [IMPORTANT]
+  ====
+  The user of the system can open files of unknown or unexpected filetypes if the extension is not visible.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'AppleShowAllExtensions = true'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 6.2 Turn on filename extensions (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  .GlobalPreferences:
+    AppleShowAllExtensions: true
+    
+

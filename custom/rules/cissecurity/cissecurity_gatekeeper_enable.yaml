@@ -1,0 +1,49 @@
+id: cissecurity_gatekeeper_enable
+title: "Enable Gatekeeper"
+discussion: |
+  [discrete]
+  ==== Description:
+  Gatekeeper is Apple's application white-listing control that restricts downloaded applications from launching. It functions as a control to limit applications from unverified sources from running without authorization.
+  
+  [discrete]
+  ==== Rationale:
+  Disallowing unsigned software will reduce the risk of unauthorized or malicious applications from running on the system.
+  
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'EnableAssessment = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85315-0
+  cci: 
+    - CCI-001749
+  800-53r4: 
+    - CM-5(3)
+    - CM-5
+    - SI-3
+    - SI-7(15)
+  srg: 
+    - SRG-OS-000366-GPOS-00153
+  disa_stig: 
+    - APPL-11-002064
+  800-171r2:
+    - 3.4.5
+  custom:
+    CIS:
+    - 2.5.2.1 Enable Gatekeeper (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "high"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.systempolicy.control:
+    EnableAssessment: true

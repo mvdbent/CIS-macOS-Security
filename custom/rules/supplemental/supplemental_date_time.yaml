@@ -1,0 +1,21 @@
+id: supplemental_date_time
+title: "Date & Time"
+discussion: |
+  This section contains recommendations related to the configurable items under the Date & Time panel.
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 2.2 Date & Time
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+mobileconfig: false
+mobileconfig_info:

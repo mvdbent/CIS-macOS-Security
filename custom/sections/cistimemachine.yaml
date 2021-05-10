@@ -1,0 +1,7 @@
+  name: "Time Machine"
+  description: |
+    One of the most important IT Operational concerns is to ensure that information is protected against loss or tampering. The purpose of the IT devices is to process the data after all. At one time the cost of IT equipment and the volume of the data might make the protection of the equipment itself more important, at this point the vast size of data archives and the lower cost of end-user equipment makes data protection central to operational planning. Backup strategies are generally focused on ensuring that there are multiple copies of relevant versions of user files. The plan is that no single hardware or software loss or failure will result in major data loss.
+    
+    Apple introduced Time Machine in 2007 as a simple to use built-in mechanism for users to ensure that their machine was backed up and if there was a mistake or loss information could be easily recovered. There are other solutions to ensure information is protected including several Enterprise solutions and simple drive or directory cloning.
+    
+    The controls in this section are specifically about Time Machine. The general ideas are applicable to any data backup solution. 

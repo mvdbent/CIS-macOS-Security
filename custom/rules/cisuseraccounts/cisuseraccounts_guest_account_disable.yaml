@@ -1,0 +1,53 @@
+id: useraccounts_guest_account_disable
+title: "Disable guest account login (Automated)"
+discussion: |
+  [discrete]
+  ==== Description:
+  The guest account allows users access to the system without having to create an account or password. Guest users are unable to make setting changes, cannot remotely login to the system and all created files, caches, and passwords are deleted upon logging out.
+
+  [discrete]
+  ==== Rationale:
+  Disabling the guest account mitigates the risk of an untrusted user doing basic reconnaissance and possibly using privilege escalation attacks to take control of the system.
+
+  [IMPORTANT]
+  ====
+  A guest user can use that access to find out additional information about the system and might be able to use privilege escalation vulnerabilities to establish greater access.
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -c 'DisableGuestAccount = 1'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce:
+    - CCE-85320-0
+  cci:
+    - CCI-001813
+  800-53r4:
+    - AC-2
+    - AC-2(9)
+  srg:
+    - SRG-OS-000364-GPOS-00151
+  disa_stig:
+    - APPL-11-002063
+  800-171r2:
+    - 3.5.1
+    - 3.5.2
+  custom:
+    CIS:
+    - 6.1.3 Disable guest account login (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+severity: "high"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.MCX:
+    DisableGuestAccount: true

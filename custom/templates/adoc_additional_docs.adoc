@@ -1,0 +1,29 @@
+== Applicable Documents
+////
+ASSOCIATED DOCUMENTS
+  Add Government and Non-Government documents related to this handbook in this section.
+  Add to the tables between the |==== tags, below the header line
+  Example:
+    [%header, cols=2*a]                            <-- table format block
+    |====                                          <-- table opening tag
+    |Document Number|Document Title                <-- header line
+                                                   <-- empty line for readability (optional)
+
+                                                   <-- empty line for readability (optional)
+    |====                                          <-- table closing tag
+////
+[%header, cols=2*a]
+.National Institute of Standards and Technology (NIST)
+|===
+|Document Number
+|Document Title
+|link:https://nvd.nist.gov/800-53[NIST Special Publication 800-53 Rev 4]|_NIST Special Publication 800-53 Rev 4_
+|===
+
+[%header, cols=2*a]
+.National Institute of Standards and Technology (NIST)
+|===
+|Document Number
+|Document Title
+|link:https://www.nist.gov/itl/tig/projects/special-publication-800-63[NIST Special Publication 800-63]|_NIST Special Publication 800-63_
+|===

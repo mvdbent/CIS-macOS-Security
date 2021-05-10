@@ -1,0 +1,39 @@
+id: cissystempreferences_hot_corners_secure
+title: "Secure screen saver corners"
+discussion: |
+  [discrete]
+  ==== Description:
+  Hot Corners can be configured to disable the screen saver by moving the mouse cursor to a corner of the screen.
+  
+  [discrete]
+  ==== Rationale:
+  Setting a hot corner to disable the screen saver poses a potential security risk since an unauthorized person could use this to bypass the login screen and gain access to the system.
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -Ec '"wvous-bl-corner" = 6|"wvous-br-corner" = 6|"wvous-tl-corner" = 6|"wvous-tr-corner" = 6'
+result:
+  integer: 0
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.3.2 Secure screen saver corners (Automated)
+    - Level 2
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L2
+severity: "medium"
+mobileconfig: true
+mobileconfig_info:
+  com.apple.ManagedClient.preferences:
+    com.apple.dock:
+      wvous-br-corner: 5

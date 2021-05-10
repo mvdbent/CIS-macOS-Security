@@ -1,0 +1,42 @@
+id: cisupdates_app_updates
+title: "Enable app update installs"
+discussion: |
+  [discrete]
+  ==== Description: 
+  Ensure that application updates are installed after they are available from Apple. These updates do not require reboots or admin privileges for end users.
+  
+  [discrete]
+  ==== Rationale:
+  Patches need to be applied in a timely manner to reduce the risk of vulnerabilities being exploited
+
+  [IMPORTANT]
+  ====
+  Unpatched software may be exploited
+  ====
+
+  [discrete]
+  ==== Audit:
+check: |
+  /usr/bin/profiles -P -o stdout | /usr/bin/grep -Ec '(AutomaticallyInstallAppUpdates = 1)'
+result:
+  integer: 1
+fix: |
+  This is implemented by a Configuration Profile.
+references:
+  cce: 
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 1.4 Enable app update installs (Automated)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: true
+mobileconfig_info:
+  com.apple.SoftwareUpdate:
+    AutomaticallyInstallAppUpdates: true

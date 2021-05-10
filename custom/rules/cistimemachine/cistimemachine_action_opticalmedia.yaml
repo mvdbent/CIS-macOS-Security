@@ -1,0 +1,56 @@
+id: cistimemachine_action_opticalmedia
+title: "Automatic Actions for Optical Media (Manual)"
+discussion: |
+  [discrete]
+  ==== Description:
+  Managing automatic actions, while useful in very few situations, is unlikely to increase security on the computer and does complicate the users experience and add additional complexity to the configuration. These settings are user controlled and can be changed without Administrator privileges unless controlled through MCX settings or Parental Controls. Unlike Windows Auto-run the optical media is accessed through Operating System applications, those same applications can open and access the media directly. If optical media is not allowed in the environment the optical media drive should be disabled in hardware and software.
+  
+  In macOS Big Sur (11.0) the CD/DVD options only appear when an appropriate device is connected.
+
+  [discrete]
+  ==== Rationale:
+  Setting automatic actions for optical media can mitigate malicious code from running automatically when optical media is inserted.
+
+  [NOTE] 
+  ====
+  The check and fix are for the currently logged in user. To get the currently logged in user, run the following.
+  [source,bash]
+  ----
+  CURRENT_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+  ----
+  ====
+
+  [discrete]
+  ==== Audit:
+  For all users, run the following commands to verify the optical media actions
+  
+  The output will give the action. Examples of the actions are:
+
+  1. The action Ask what to do is _action = 2_
+
+  2. The action Ignore is _action = 1_
+
+  3. The action to Open Music is _action = 101_
+  
+check: |
+  /usr/bin/sudo -u "$CURRENT_USER" /usr/bin/defaults read com.apple.digihub
+result:
+  N/A
+fix: |
+  Set the optical media action for all users
+references:
+  cce:
+    - N/A
+  800-53r4:
+    - N/A
+  custom:
+    CIS:
+    - 2.12 Automatic Actions for Optical Media (Manual)
+    - Level 1
+macOS:
+  - "11.0"
+tags:
+  - CIS-Benchmark
+  - CIS-Benchmark-L1
+mobileconfig: false
+mobileconfig_info:

@@ -1,0 +1,21 @@
+id: supplemental_filesystem_premissions_accesscontrols
+title: "File System Permissions and Access Controls"
+discussion: |
+  File system permissions have always been part of computer security. There are several principles that are part of best practices for a posix based system that are contained in this section, This section does not contain a complete list of every permission on a macOS System that might be problematic. Developers and use cases differ and what some admins long in the profession might consider a travesty a risk assessor steeped in BYOD trends may not give a second glance at. We are documenting here controls that should point out truly bad practices or anomalies that should be looked at and considered closely. Many of the controls are to mitigate the risk of privilege escalation attacks and data exposure to unauthorized parties.
+check: |
+fix: |
+references:
+  cce:
+    - N/A
+  800-53r4: 
+    - N/A
+  custom:
+    CIS:
+    - 5.1 File System Permissions and Access Controls
+macOS:
+  - "11.0"
+tags:
+  - supplemental
+  - CIS-Benchmark
+mobileconfig: false
+mobileconfig_info:
