@@ -99,6 +99,3 @@ To generate the guidance files (AsciiDoc, HTML, PDF, Excel, mobileconfigs, and c
 ```bash
 ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Users/<user>/Git/CIS-macOS-Security/custom/Images/cis_banner.png -p -s -x
 ```
-
-### Example 
-<img src="https://github.com/mvdbent/CIS-macOS-Security/blob/main/example.png" width="770">
