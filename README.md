@@ -27,12 +27,11 @@ So i started to transform the CIS Benchmark PDF from Big Sur into a custom rules
 ## Usage/Requirements
 * The CIS Benchmark rules are tested on macOS Big Sur 11.* and the latest macOS Security Compliance Project release.
 * Download the macOS Security Compliance Project to your device. 
-* Copy the CIS-macOS-Security Custom folder into the macOS Security Compliance Project and overwrite the empty custom folder.
-* You can also include the macOS Security Compliance Project into the CIS-macOS-Security folder but remember to git-ignore the macOS Security Compliance Project from the CIS-macOS-Security Compliance Project
+* Copy the CIS-macOS-Security `/custom/` folder into the macOS Security Compliance Project and overwrite the empty `/custom/` folder. The `/custom/` folder in the macOS Security Compliance Project is in .gitignore file so you could easly update to the latest version of macOS Security Compliance Project without loosing the CIS Benchmark baselines.
 
 
 ### Generate a Baseline
-The project provides the following baseline files, located in the /custom/baselines/ folder:
+The project provides the following baseline files, located in the `/custom/baselines/` folder:
 
 * CIS-Benchmark.yaml
 * CIS-Benchmark-L1.yaml
@@ -66,13 +65,13 @@ Get a list of available tags and you will see the CIS-Benchmark tags as well
 ```bash
 ➜  CIS-macOS-Security git:(master) ./scripts/generate_baseline.py -k CIS-Benchmark-L1
 ➜  CIS-macOS-Security git:(master) ls -dn build/baselines/*
--rw-r--r--  1 501  20  6350 Jan 19 13:30 build/baselines/CIS-Benchmark-L1.yaml
+-rw-r--r--  1 501  20  6350 May 10 13:30 build/baselines/CIS-Benchmark-L1.yaml
 ```
 The generated baseline will be saved into the `build/baselines/`
 
 ### Generate CIS Benchmark guidance
 
-To generate the guidance files (AsciiDoc, HTML, PDF, Excel, mobileconfigs, and compliance script) run the `generate-guidance.py` script and point it to either one of the built-in baseline.yaml files or a custom CIS Benchmark baseline.yaml file in the `custom/baselines` folder or created by the `generate-baseline.py` script.
+To generate the guidance files (AsciiDoc, HTML, PDF, Excel, mobileconfigs, and compliance script) run the `generate-guidance.py` script and point it to either one of the built-in `baseline.yaml` files or a custom CIS Benchmark baseline.yaml file in the `custom/baselines` folder or created by the `generate-baseline.py` script.
 
 **AsciiDoc, HTML, and PDF**
 
@@ -96,7 +95,7 @@ To generate the guidance files (AsciiDoc, HTML, PDF, Excel, mobileconfigs, and c
 ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p -s
 ```
 
-
+**AsciiDoc, HTML, PDF, Excel, mobileconfigs, compliance script, and custom **
 ```bash
 ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Users/<user>/Git/CIS-macOS-Security/custom/Images/cis_banner.png -p -s -x
 ```
