@@ -28,8 +28,9 @@ So i started to transform the CIS Benchmark PDF from Big Sur into a custom rules
 *The CIS Benchmark rules are tested on macOS Big Sur 11.* and the latest macOS Security Compliance Project release.*
 
 1. Download the **CIS-macOS-Security** to your device. 
-2. Download the **macOS Security Compliance Project** to your device. 
-3. Copy the **CIS-macOS-Security** `/custom/` folder into the **macOS Security Compliance Project** and overwrite the empty `/custom/` folder. 
+2. Download the **macOS Security Compliance Project** to your device.
+3. Install the Prerequisites for the **macOS Security Compliance Project**, see instuctions [here](https://github.com/usnistgov/macos_security/wiki/Getting-Started)
+4. Copy the **CIS-macOS-Security** `/custom/` folder into the **macOS Security Compliance Project** and overwrite the empty `/custom/` folder. 
 
 The `/custom/` folder in the **macOS Security Compliance Project** is in the .gitignore file so you can safely update to the latest version of **macOS Security Compliance Project** without loosing the **CIS Benchmark baselines**.
 
