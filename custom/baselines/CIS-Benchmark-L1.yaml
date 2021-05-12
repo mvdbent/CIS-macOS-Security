@@ -1,0 +1,113 @@
+title: "macOS 11.0: Security Configuration - CIS-Benchmark-L1"
+description: |
+  This guide describes the actions to take when securing a macOS 11.0 system against the CIS-Benchmark baseline.
+profile:
+  - section: "cisupdates"
+    rules:
+      - cisupdates_current_software #profile
+      - cisupdates_auto_update #script
+      - cisupdates_auto_download #profile
+      - cisupdates_app_updates #profile
+      - cisupdates_system_security_updates #profile
+      - cisupdates_macos_updates #profile
+  - section: "cissystempreferences" #script
+    rules:
+      - supplemental_bluetooth
+      - cissystempreferences_bluetooth_disable #profile
+      - cissystempreferences_bluetooth_status_menubar #script
+      - supplemental_date_time
+      - cissystempreferences_time_server_enforce #profile
+      - cissystempreferences_time_server_configure #profile
+      - supplemental_desktop_screensaver
+      - cissystempreferences_screensaver_timeout_enforce #profile
+      - cissystempreferences_hot_corners_familiarize #profile
+  - section: "cissharing"
+    rules:
+      - cissharing_rae_disable #script
+      - cissharing_internet_sharing_disable #profile
+      - cissharing_screen_sharing_disable #profile
+      - cissharing_printer_disable #script
+      - cissharing_ssh_disable #script
+      - cissharing_removable_media_disable_sharing #script
+      - cissharing_bluetooth_sharing_disable #script
+      - cissharing_smbd_disable #script
+      - cissharing_remote_management_disable #script
+  - section: "cissecurity"
+    rules:
+      - supplemental_encryption
+      - cissecurity_enable_filevault #profile
+      - cissecurity_apfsvolumes_encrypted #script
+      - cissecurity_corestoragevolumes_encrypted #script
+      - supplemental_firewall
+      - cissecurity_gatekeeper_enable #profile
+      - cissecurity_firewall_enable #profile
+      - cissecurity_firewall_stealth_mode_enable #profile
+      - cissecurity_firewall_application_rules #profile
+      - cissecurity_personalized_advertising_disable #profile
+  - section: "cistimemachine"
+    rules:
+      - cistimemachine_time_machine_encrypted #manual
+      - cistimemachine_wake_for_network #script
+      - cistimemachine_power_nap #script
+      - cistimemachine_terminal_securekeyboard #profile
+      - cistimemachine_efi_valid #manual
+      - cistimemachine_action_opticalmedia #manual
+      - cistimemachine_review_siri #script
+  - section: "cisaudit"
+    rules:
+      - cisaudit_auditd_enabled #script
+      - cisaudit_install_log #script
+      - cisaudit_security_auditing #script
+      - cisaudit_control_access #script
+      - cisaudit_firewall_log_enable #script
+  - section: "cisnetwork"
+    rules:
+      - cisnetwork_wifi_menubar #script
+      - cisnetwork_httpd_disable #script
+      - cisnetwork_nfsd_disable #script
+  - section: "cissystempremissions"
+    rules:
+      - supplemental_filesystem_premissions_accesscontrols
+      - cissystempremissions_home_folders_secure #script
+      - cissystempremissions_permissions_apps #script
+      - cissystempremissions_system_worldwritablefiles #script
+  - section: "cispwmanagement"
+    rules:
+      - cispwmanagement_account_lockout_enforce #profile
+      - cispwmanagement_minimum_length_enforce #profile
+      - cispwmanagement_password_age #profile
+      - cispwmanagement_history_enforce #profile
+      - cispwmanagement_password_sudo_timeout_period #script
+      - cispwmanagement_timestamp_user_tty #script
+      - cispwmanagement_root_disable #script
+      - cispwmanagement_autologin_disable #profile
+      - cispwmanagement_screensaver_password_enforce #profile
+      - cispwmanagement_system_wide_preferences_configure #script
+      - cispwmanagement_unlock_active_user_session_disable #script
+      - cispwmanagement_custom_message_loginscreen #profile
+      - cispwmanagement_password_hints_remove #script
+      - cispwmanagement_sip_enable #script
+      - cispwmanagement_authenticated_root_enable #script
+      - cispwmanagement_library_validation #script
+  - section: "cisuseraccounts"
+    rules:
+      - supplemental_accounts_preferences_actions_Items
+      - cisuseraccounts_loginwindow_prompt_username_password_enforce #profile
+      - cisuseraccounts_password_hints_disable #profile
+      - cisuseraccounts_guest_account_disable #profile
+      - cisuseraccounts_guest_access_smb_disable #profile
+      - cisuseraccounts_remove_guest_homefolder #script
+      - cisuseraccounts_enable_filename_extensions #profile
+      - cisuseraccounts_disable_autorun_files_safari #profile
+  - section: "cisappendix"
+    rules:
+      - supplemental_permissions #manual
+      - supplemental_applewatch #manual
+      - supplemental_unified_logging #manual
+      - supplemental_airdrop_security #script
+      - supplemental_touchid #manual
+      - supplemental_sidecar #manual
+      - supplemental_screentime #manual
+  - section: "cisappendix_summary_table"
+    rules:
+      - supplemental_checklist

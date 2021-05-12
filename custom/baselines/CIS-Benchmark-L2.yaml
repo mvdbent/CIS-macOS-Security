@@ -1,0 +1,64 @@
+title: "macOS 11.0: Security Configuration - CIS-Benchmark-L2"
+description: |
+  This guide describes the actions to take when securing a macOS 11.0 system against the CIS-Benchmark baseline.
+profile:
+  - section: "cisupdates"
+    rules:
+      - cisupdates_computername_considerations #profile
+  - section: "cissystempreferences" #script
+    rules:
+      - supplemental_desktop_screensaver
+      - cissystempreferences_hot_corners_secure #profile
+  - section: "cissharing"
+    rules:
+      - cissharing_content_caching_disable #profile
+      - cissharing_media_sharing_disabled #profile
+  - section: "cissecurity"
+    rules:
+      - cissecurity_location_services_enable #script
+      - cissecurity_location_services_monitor #manual
+      - cissecurity_diagnostics_reports_disable #profile
+      - cissecurity_camera_privacy_confidentiality_concerns #manual
+  - section: "cisicloud"
+    rules:
+      - cisicloud_configuration #profile
+      - cisicloud_keychain_disable #profile
+      - cisicloud_drive_disable #profile
+      - cisicloud_sync_disable #profile
+  - section: "cistimemachine"
+    rules:
+      - cistimemachine_time_machine_autobackup #script
+  - section: "cisaudit"
+    rules:
+      - cisaudit_flags #script
+      - cisaudit_software_inventory #manual
+  - section: "cisnetwork"
+    rules:
+      - cisnetwork_bonjour_disable #profile
+      - cisnetwork_network_locations #manual
+      - cisnetwork_wifi_settings #script
+  - section: "cissystempremissions"
+    rules:
+      - supplemental_filesystem_premissions_accesscontrols
+      - cissystempremissions_library_worldwritablefiles #script
+  - section: "cispwmanagement"
+    rules:
+      - cispwmanagement_alpha_character_enable #profile
+      - cispwmanagement_numeric_character_enforce #profile
+      - cispwmanagement_special_character_enforce #profile
+      - cispwmanagement_lower_case_character_enforce #profile
+      - cispwmanagement_password_lock_login_keychain #script
+      - cispwmanagement_login_keychain_locked_sleep #script
+      - cispwmanagement_hibernate_enabled #script
+      - cispwmanagement_policy_banner_loginwindow_enforce #script
+      - cispwmanagement_disable_fast_user_switching #profile
+      - cispwmanagement_secure_individual_keychains #manual
+  - section: "cisappendix"
+    rules:
+      - supplemental_efi_password #manual
+      - supplemental_filefault_password_appleid #manual
+      - supplemental_appstore_password #manual
+      - supplemental_system_information_backup_remote #manual
+  - section: "cisappendix_summary_table"
+    rules:
+      - supplemental_checklist
