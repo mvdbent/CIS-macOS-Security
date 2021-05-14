@@ -20,16 +20,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
 This CIS Benchmark rule set is build to use with the macOS Security Compliance Project [here](https://github.com/usnistgov/macos_security)
 
 ## Info
-While working with CIS Benchmarks PDF (guidelines for scripts and/or Configuration Profiles) I had the feeling there must be a better and faster way. The guys from the macOS Security Compliance Project did an amazing job to automate the guidence, needed scripts, configuration profiles, and remediation script. 
+While working with CIS Benchmarks PDF (guidelines for scripts and/or Configuration Profiles) I felt there must be a better and faster way. The guys from the macOS Security Compliance Project did an amazing job automating the guidance, needed scripts, configuration profiles, and remediation script.
 
-So i started to transform the CIS Benchmark PDF from Big Sur into a custom rules set to integrate with the macOS Security Compliance Project.
+So I started to transform the CIS Benchmark PDF from Big Sur into custom rules set to integrate with the macOS Security Compliance Project.
 
 ## Usage/Requirements
 *The CIS Benchmark rules are tested on macOS Big Sur 11.* and the latest macOS Security Compliance Project release.*
 
 1. Download the **CIS-macOS-Security** to your device. 
-2. Download the **macOS Security Compliance Project** to your device. 
-3. Copy the **CIS-macOS-Security** `/custom/` folder into the **macOS Security Compliance Project** and overwrite the empty `/custom/` folder. 
+2. Download the **macOS Security Compliance Project** to your device.
+3. Install the Prerequisites for the **macOS Security Compliance Project**, see instuctions [here](https://github.com/usnistgov/macos_security/wiki/Getting-Started)
+4. Copy the **CIS-macOS-Security** `/custom/` folder into the **macOS Security Compliance Project** and overwrite the empty `/custom/` folder. 
 
 The `/custom/` folder in the **macOS Security Compliance Project** is in the .gitignore file so you can safely update to the latest version of **macOS Security Compliance Project** without loosing the **CIS Benchmark baselines**.
 
