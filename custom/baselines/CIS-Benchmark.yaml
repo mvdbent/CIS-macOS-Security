@@ -133,7 +133,7 @@ profile:
   - section: "cisappendix"
     rules:
       - supplemental_efi_password #manual
-      - supplemental_filefault_password_appleid #manual
+      - supplemental_filevault_password_appleid #manual
       - supplemental_permissions #manual
       - supplemental_appstore_password #manual
       - supplemental_applewatch #manual
