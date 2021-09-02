@@ -100,14 +100,14 @@ $ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x
 ```bash
 $ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p
 ```
-**AsciiDoc, HTML, PDF, Excel, mobileconfigs, and compliance script**
+**AsciiDoc, HTML, PDF, Excel, and mobileconfigs**
 
 ```bash
-$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p -s
+$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p
 ```
 
-**AsciiDoc, HTML, PDF, Excel, mobileconfigs, compliance script, and custom**
+**AsciiDoc, HTML, PDF, Excel, mobileconfigs, and custom logo**
 _use full-path to custom logo_
 ```bash
-$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Git/macOS-Security/custom/Images/cis_banner.png -p -s -x
+$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Git/macOS-Security/custom/Images/cis_banner.png -p -x
 ```
