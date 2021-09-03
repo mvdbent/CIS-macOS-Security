@@ -1,4 +1,5 @@
 # CIS-macOS-Security Compliance Project
+<img src="https://github.com/mvdbent/CIS-macOS-Security/blob/main/custom/Images/CIS-macOS-Security.png" width="250">
 
 _**Current state of the scripts are:** "This project is 'As is" please be free to give me any feedback_
 
