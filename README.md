@@ -1,8 +1,9 @@
 # CIS-macOS-Security Compliance Project
 
-_**Current state of the scripts are:** "This project is "As is" please be free to give me any feedback_
+_**Current state of the scripts are:** "This project is 'As is" please be free to give me any feedback_
 
-```THE SCRIPTS ARE PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+```
+THE SCRIPTS ARE PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
 INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY 
 AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
 I BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 
@@ -94,11 +95,6 @@ $ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -l /Git/mac
 
 ```bash
 $ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x
-```
-**AsciiDoc, HTML, PDF, Excel, and mobileconfigs**
-
-```bash
-$ ./scripts/generate_guidance.py custom/baselines/CIS-Benchmark.yaml -x -p
 ```
 **AsciiDoc, HTML, PDF, Excel, and mobileconfigs**
 
