@@ -3,6 +3,7 @@
 
 _**Current state of the scripts are:** "This project is 'As is" please be free to give me any feedback_
 
+![GitHub](https://img.shields.io/badge/macOS-11-success)
 ![GitHub](https://img.shields.io/github/license/mvdbent/CIS-macOS-Security)
 
 ## DESCRIPTION
