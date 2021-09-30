@@ -1,4 +1,4 @@
-id: useraccounts_guest_access_smb_disable
+id: cisuseraccounts_guest_access_smb_disable
 title: 'Disable "Allow guests to connect to shared folders" (Automated)'
 discussion: |
   [discrete]

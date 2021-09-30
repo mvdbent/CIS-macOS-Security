@@ -1,4 +1,4 @@
-id: useraccounts_guest_account_disable
+id: cisuseraccounts_guest_account_disable
 title: "Disable guest account login (Automated)"
 discussion: |
   [discrete]

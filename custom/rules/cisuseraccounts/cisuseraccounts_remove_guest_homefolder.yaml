@@ -1,4 +1,4 @@
-id: useraccounts_remove_guest_homefolder
+id: cisuseraccounts_remove_guest_homefolder
 title: "Remove Guest home folder (Automated)"
 discussion: |
   [discrete]
