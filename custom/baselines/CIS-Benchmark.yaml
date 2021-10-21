@@ -1,6 +1,10 @@
 title: "macOS 11.0: Security Configuration - CIS-Benchmark"
 description: |
   This guide describes the actions to take when securing a macOS 11.0 system against the CIS-Benchmark baseline.
+authors: |
+  |===
+  |Mischa van der Bent|Jamf
+  |===
 profile:
   - section: "cisupdates"
     rules:

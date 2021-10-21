@@ -31,5 +31,5 @@ This benchmark exemplifies the great things a community of users, vendors, and s
 **Implementation CIS Benchmark into macOS Security Compliance Project** +
 [width="100%",cols="1,3"]
 |===
-|Mischa van der Bent|Consulting Engineer Implementation EMEIA
+|Mischa van der Bent|Jamf
 |===
